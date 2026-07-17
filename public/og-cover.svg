@@ -1,0 +1,16 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="og-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22c7ff" />
+      <stop offset="1" stop-color="#7c6bf5" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#05070d" />
+  <circle cx="120" cy="80" r="260" fill="#22c7ff" opacity="0.12" />
+  <circle cx="1100" cy="560" r="300" fill="#7c6bf5" opacity="0.12" />
+  <rect x="80" y="80" width="72" height="72" rx="18" fill="url(#og-grad)" />
+  <text x="98" y="130" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#ffffff">D</text>
+  <text x="80" y="260" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#ffffff">Digiinsaf</text>
+  <text x="80" y="320" font-family="Arial, sans-serif" font-size="30" fill="#c6cbdc">Turning ambitious ideas into reliable digital products.</text>
+  <text x="80" y="380" font-family="Arial, sans-serif" font-size="22" fill="#8b93a7">Estonia-based digital product studio</text>
+</svg>

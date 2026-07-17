@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-dark: #07131d;
+    --color-bg-secondary: #0e2433;
+    --color-bg-card: #102a3a;
+    --color-accent-cyan: #2e7dba;
+    --color-accent-glow: #6cb6e8;
+    --color-button-gold: #e8c66a;
+    --color-text-white: #f8fafc;
+    --color-text-muted: #b8c5d1;
+    --color-signal-green: #3ddc97;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Single fixed dark theme (no light mode) — background/text come from the
+     approved brief's palette (see the CSS vars above) rather than Tailwind's
+     `mist`/`ink-900` light-mode defaults. */
+  body {
+    @apply font-body antialiased;
+    background: #07131d;
+    color: #f8fafc;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-cyan-500/30 text-white;
+  }
+}
+
+@layer components {
+  .container-xl {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8 lg:px-10;
+  }
+
+  .glass-panel {
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/10;
+  }
+
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent;
+  }
+
+  /* Named muted-text roles — replaces hand-tuned opacity values
+     (/85, /80, /75, /70, /40 of the same color) scattered per component. */
+  .text-muted-onlight {
+    @apply text-graphite-500;
+  }
+
+  .text-muted-onlight-strong {
+    @apply text-graphite-600;
+  }
+
+  /* Secondary Text from the approved brief (#B8C5D1), at three strengths. */
+  .text-muted-ondark {
+    color: rgba(184, 197, 209, 0.85);
+  }
+
+  .text-muted-ondark-strong {
+    color: rgba(184, 197, 209, 0.95);
+  }
+
+  .text-muted-ondark-soft {
+    color: rgba(184, 197, 209, 0.6);
+  }
+
+  /* Card surfaces — the shell every card component composes. Both names are
+     kept (some call sites still say "surface-card" from when it meant a
+     light card) but they're identical now that the site is dark-only. */
+  .surface-card,
+  .surface-card-dark {
+    @apply glass-panel relative overflow-hidden rounded-xl2 transition-all duration-300;
+  }
+
+  .surface-card-interactive {
+    @apply hover:-translate-y-1 hover:border-cyan-500/40 hover:shadow-elevation-md;
+  }
+
+  .surface-card::before,
+  .surface-card-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    background:
+      linear-gradient(135deg, rgba(54, 112, 221, 0.14), transparent 42%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.34), transparent 32%);
+  }
+
+  .surface-card:hover::before,
+  .surface-card-dark:hover::before {
+    opacity: 1;
+  }
+
+  .btn-shine::before {
+    content: '';
+    position: absolute;
+    inset: -40% auto -40% -70%;
+    width: 48%;
+    transform: skewX(-18deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+    transition: left 650ms ease;
+    z-index: -1;
+  }
+
+  .btn-shine:hover::before {
+    left: 125%;
+  }
+}
+
+.bg-hero-grid {
+  background-image:
+    linear-gradient(rgba(139, 178, 252, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 178, 252, 0.05) 1px, transparent 1px),
+    radial-gradient(ellipse at 22% 12%, rgba(54, 112, 221, 0.25), transparent 42%),
+    radial-gradient(ellipse at 78% 8%, rgba(139, 147, 160, 0.1), transparent 38%),
+    linear-gradient(180deg, rgba(15, 22, 40, 0.95), rgba(8, 12, 22, 0.94) 44%, rgba(5, 7, 13, 0.98));
+  background-size: 44px 44px, 44px 44px, 100% 100%, 100% 100%, 100% 100%;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+}
+
+.bg-precision-lines {
+  background-image:
+    linear-gradient(90deg, rgba(84, 142, 239, 0.14) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 88, 196, 0.12), transparent 34%, rgba(139, 147, 160, 0.08), transparent 72%);
+  background-size: 72px 72px, 72px 72px, 100% 100%;
+}
+
+.bg-dashboard-sheen {
+  background:
+    linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.05) 38%, transparent 52%),
+    radial-gradient(ellipse at 16% 0%, rgba(54, 112, 221, 0.18), transparent 42%),
+    radial-gradient(ellipse at 100% 100%, rgba(139, 147, 160, 0.1), transparent 40%);
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 4.5s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    transform: scale(0.985);
+    opacity: 0.72;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: #05070d;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 0.5rem 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+.language-switcher #google_translate_element,
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+.skiptranslate iframe,
+iframe.skiptranslate,
+.goog-te-gadget,
+.goog-te-balloon-frame,
+#goog-gt-tt {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
+
+html.translated-ltr,
+html.translated-rtl,
+body {
+  top: 0 !important;
+  margin-top: 0 !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  /* `overflow-x: hidden` paired with any overflow-y value other than
+     `clip` forces overflow-y to compute as `auto` per the CSS spec (even
+     if overflow-y is explicitly "visible") — that turns these elements
+     into scroll containers and breaks `position: sticky` for anything
+     inside (e.g. the header). `clip` is exempt from that pairing rule,
+     so it blocks horizontal overflow without the side effect. */
+  overflow-x: clip;
+  width: 100%;
+}
