@@ -5,7 +5,7 @@ export default function ChatbotHeader({ config, onMinimize, onClose, onRestart }
   return (
     <header className="flex items-center justify-between bg-ink-950 px-4 py-3.5">
       <div className="flex items-center gap-2.5">
-        <Logo className="rounded-full" />
+        <Logo />
         <div>
           <p className="text-sm font-semibold text-white">{config.chatbotName}</p>
           <p className="flex items-center gap-1 text-[11px] text-mist-200/60">
