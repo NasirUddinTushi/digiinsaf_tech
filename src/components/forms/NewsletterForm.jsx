@@ -49,7 +49,7 @@ export default function NewsletterForm() {
           placeholder="you@company.com"
           aria-invalid={Boolean(errors.email)}
           aria-describedby={errors.email ? 'newsletter-email-error' : undefined}
-          className="focus-ring w-full rounded-full border border-white/[0.15] bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-mist-200/40"
+          className="focus-ring w-full rounded-full border border-white/[0.15] bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40"
           {...register('email')}
         />
         {errors.email && (
@@ -61,7 +61,7 @@ export default function NewsletterForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-cta-gradient px-5 py-2.5 text-sm font-medium text-white disabled:opacity-70"
+        className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-sea-700 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sea-600 disabled:opacity-70"
       >
         {status === 'loading' && <Loader2 className="h-4 w-4 animate-spin" />}
         Subscribe

@@ -7,15 +7,15 @@ export default function CaseStudyCard({ project }) {
   return (
     <Link
       to={`/work/${project.slug}`}
-      className="surface-card focus-ring group flex items-center justify-between gap-4 p-5 hover:-translate-y-0.5 hover:border-white/25"
+      className="focus-ring group flex items-center justify-between gap-4 rounded-2xl border border-hairline bg-white p-5 transition-shadow duration-300 hover:shadow-elevation-sm"
     >
       <div>
-        <p className="text-caption font-medium uppercase tracking-wider text-graphite-400">
+        <p className="text-caption font-medium uppercase tracking-wider text-charcoal-muted">
           {project.industry}
         </p>
-        <p className="mt-1 font-semibold text-white">{project.title}</p>
+        <p className="mt-1 font-semibold text-charcoal">{project.title}</p>
       </div>
-      <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-graphite-400 transition-colors group-hover:text-cyan-400" />
+      <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-charcoal-muted transition-colors group-hover:text-sea-700" />
     </Link>
   );
 }

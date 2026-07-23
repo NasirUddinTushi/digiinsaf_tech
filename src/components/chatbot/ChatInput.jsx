@@ -35,7 +35,7 @@ export default function ChatInput({ disabled, onSend }) {
   };
 
   return (
-    <div className="border-t border-white/10 p-3">
+    <div className="border-t border-hairline p-3">
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -56,19 +56,19 @@ export default function ChatInput({ disabled, onSend }) {
           placeholder="Type your message… (Enter to send, Shift+Enter for a new line)"
           disabled={disabled}
           maxLength={MAX_MESSAGE_LENGTH}
-          className="focus-ring w-full resize-none rounded-2xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-graphite-600 disabled:opacity-60"
+          className="focus-ring w-full resize-none rounded-2xl border border-hairline bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal-muted disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={disabled || !value.trim()}
           aria-label="Send message"
-          className="focus-ring flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-cta-gradient text-white disabled:opacity-50"
+          className="focus-ring flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sea-700 text-white transition-colors hover:bg-sea-800 disabled:opacity-50"
         >
           <Send className="h-4 w-4" />
         </button>
       </form>
       {isNearMessageLimit(value) && (
-        <p className="mt-1 text-right text-[11px] text-graphite-400">{charsRemaining(value)} characters left</p>
+        <p className="mt-1 text-right text-[11px] text-charcoal-muted">{charsRemaining(value)} characters left</p>
       )}
     </div>
   );

@@ -18,8 +18,8 @@ export default function FAQAccordion({ items }) {
           <div
             key={item.question}
             className={cn(
-              'overflow-hidden rounded-xl2 border transition-colors duration-300',
-              isOpen ? 'border-cyan-400/40 bg-white/[0.04]' : 'border-white/10'
+              'overflow-hidden rounded-xl2 border bg-white transition-colors duration-300',
+              isOpen ? 'border-sea-700/40' : 'border-hairline'
             )}
           >
             <h3>
@@ -29,12 +29,12 @@ export default function FAQAccordion({ items }) {
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                className="focus-ring flex w-full items-center gap-4 px-5 py-5 text-left text-base font-medium text-white transition-colors hover:bg-white/5 sm:px-6"
+                className="focus-ring flex w-full items-center gap-4 px-5 py-5 text-left text-base font-medium text-charcoal transition-colors hover:bg-sea-50 sm:px-6"
               >
                 <span
                   className={cn(
                     'flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300',
-                    isOpen ? 'bg-cyan-600 text-white' : 'bg-white/10 text-cyan-400'
+                    isOpen ? 'bg-sea-700 text-white' : 'bg-sea-50 text-sea-700'
                   )}
                 >
                   <Plus className={cn('h-4 w-4 transition-transform duration-300', isOpen && 'rotate-45')} />
@@ -54,7 +54,7 @@ export default function FAQAccordion({ items }) {
                   transition={{ duration: 0.25, ease: 'easeOut' }}
                   className="overflow-hidden"
                 >
-                  <p className="px-5 pb-5 pl-[4.25rem] text-body-sm leading-relaxed text-muted-ondark sm:px-6 sm:pl-[4.75rem]">
+                  <p className="px-5 pb-5 pl-[4.25rem] text-body-sm leading-relaxed text-charcoal-muted sm:px-6 sm:pl-[4.75rem]">
                     {item.answer}
                   </p>
                 </motion.div>

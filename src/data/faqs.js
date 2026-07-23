@@ -1,6 +1,5 @@
-﻿// `featured: true` marks the 6 questions shown in the homepage FAQ preview
-// (see src/components/home/FAQSection.jsx); the full list still appears
-// wherever all FAQs are shown (e.g. the Services page).
+﻿// `featured: true` marks a shorter highlight set for FAQ previews; the full
+// list appears wherever all FAQs are shown (e.g. the Services page).
 
 export const faqs = [
   {

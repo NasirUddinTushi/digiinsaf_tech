@@ -1,82 +1,81 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, Sparkles } from 'lucide-react';
 import { fadeUpViewportStagger } from '@/utils/motionVariants';
 import { cn } from '@/utils/cn';
 
-const gradients = [
-  'from-cyan-600 to-violet-600',
-  'from-violet-600 to-ink-700',
-  'from-ink-700 to-cyan-600',
-  'from-cyan-500 to-violet-500',
-];
-
-export default function ProjectCard({ project, index = 0 }) {
-  const gradient = gradients[index % gradients.length];
+export default function ProjectCard({ project, index = 0, variant = 'compact' }) {
+  const featured = variant === 'featured';
 
   return (
     <motion.article
       {...fadeUpViewportStagger(index)}
-      whileHover={{ y: -8 }}
-      transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-white/10 bg-white/[0.055] shadow-card-dark backdrop-blur-xl"
+      className={cn(
+        'group flex h-full flex-col overflow-hidden rounded-2xl border border-hairline bg-white shadow-elevation-sm transition-all duration-300 hover:shadow-elevation-md hover:border-sea-700/40',
+        featured && 'lg:flex-row lg:items-stretch'
+      )}
     >
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.11] via-transparent to-cyan-300/[0.08] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      {/* Browser Frame Window Header */}
+      <div
+        className={cn(
+          'relative flex flex-col overflow-hidden bg-sea-50 border-b border-hairline',
+          featured ? 'aspect-[16/11] lg:aspect-auto lg:w-[55%]' : 'aspect-[16/10]'
+        )}
+      >
+        {/* Browser Top Navigation Bar */}
+        <div className="flex items-center justify-between border-b border-hairline bg-slate-100/90 px-4 py-2 text-[11px] text-graphite-600">
+          <div className="flex items-center gap-1.5">
+            <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
+            <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+            <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
+          </div>
+          <span className="font-mono text-[10px] text-graphite-500 truncate max-w-[200px]">
+            {project.liveUrl ? project.liveUrl.replace('https://', '') : project.slug}
+          </span>
+          <span className="flex items-center gap-1 text-[10px] font-semibold text-signal-green">
+            ● Live
+          </span>
+        </div>
 
-      <div className={`relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br ${gradient}`}>
+        {/* Real Screenshot Preview */}
         {project.image ? (
-          <>
+          <div className="relative flex-1 overflow-hidden">
             <img
               src={project.image}
-              alt={`${project.title} website screenshot`}
+              alt={`${project.title} screenshot`}
               loading="lazy"
-              width="640"
-              height="384"
+              width="800"
+              height="520"
               className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
             />
-            <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),transparent_28%),linear-gradient(0deg,rgba(5,7,13,0.88),rgba(5,7,13,0.18)_42%,transparent_68%)]" />
-          </>
-        ) : (
-          <>
-            <span className="px-6 text-center text-lg font-semibold leading-snug text-white/90">{project.title}</span>
-            <div className="absolute inset-0 bg-grid-glow opacity-60" />
-            <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_22%_0%,rgba(255,255,255,0.24),transparent_32%),linear-gradient(180deg,transparent_42%,rgba(5,7,13,0.72))] opacity-80" />
-          </>
-        )}
-        <div className="absolute bottom-4 left-4 right-4 z-20 flex items-end justify-between gap-3">
-          <div>
-            <p className="text-caption font-semibold uppercase tracking-wider text-cyan-100/80">
-              {project.industry}
-              {project.country ? ` / ${project.country}` : ''}
-            </p>
-            <h3 className="mt-1 line-clamp-2 text-xl font-semibold leading-tight text-white">{project.title}</h3>
           </div>
-          {project.isDemo && (
-            <span className="shrink-0 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-white backdrop-blur-md">
-              Demo
-            </span>
-          )}
-        </div>
+        ) : (
+          <div className="flex h-full items-center justify-center p-6 text-center text-body-sm font-semibold text-sea-700">
+            {project.title}
+          </div>
+        )}
       </div>
 
-      <div className="relative flex flex-1 flex-col p-5 sm:p-6">
-        <p className="mb-5 text-body-sm leading-relaxed text-mist-200/75">{project.summary}</p>
+      {/* Card Body */}
+      <div className={cn('flex flex-1 flex-col p-6 sm:p-7 text-charcoal', featured && 'lg:justify-center lg:p-8')}>
+        <div className="flex items-center justify-between text-caption font-semibold uppercase tracking-wider text-sea-700">
+          <span>{project.industry}</span>
+          {project.country && <span className="text-charcoal-muted font-normal">📍 {project.country}</span>}
+        </div>
 
-        {project.servicesDelivered?.length > 0 && (
-          <p className="mb-3 text-body-sm text-mist-200/70">
-            <span className="font-medium text-white">Services: </span>
-            {project.servicesDelivered.join(', ')}
-          </p>
-        )}
+        <h3 className={cn('mt-2 font-extrabold leading-snug text-charcoal group-hover:text-sea-700 transition-colors', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
+          {project.title}
+        </h3>
 
-        {project.techStack?.length > 0 && (
-          <div className="mb-4 flex flex-wrap gap-1.5">
+        <p className={cn('mt-3 leading-relaxed text-charcoal-muted', featured ? 'text-body' : 'text-body-sm')}>
+          {project.summary}
+        </p>
+
+        {/* Tech Stack Badges */}
+        {project.techStack && (
+          <div className="mt-4 flex flex-wrap gap-1.5">
             {project.techStack.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[0.68rem] font-medium text-mist-100/75"
-              >
+              <span key={tech} className="rounded-md border border-hairline bg-sea-50/80 px-2.5 py-0.5 text-[11px] font-medium text-sea-800">
                 {tech}
               </span>
             ))}
@@ -84,33 +83,30 @@ export default function ProjectCard({ project, index = 0 }) {
         )}
 
         {project.outcome && (
-          <p className="mb-5 rounded-2xl border border-cyan-300/[0.15] bg-cyan-300/[0.06] p-3 text-body-sm text-cyan-50/80">
-            <span className="font-medium text-cyan-100">Result: </span>
+          <div className="mt-4 rounded-lg border border-sea-200 bg-sea-50/60 p-3 text-xs text-charcoal">
+            <span className="font-bold text-sea-800 flex items-center gap-1">
+              <Sparkles className="h-3.5 w-3.5 text-sea-700" /> Outcome:
+            </span>{' '}
             {project.outcome}
-          </p>
+          </div>
         )}
 
-        <div className="mt-auto flex flex-wrap items-center gap-2.5">
+        <div className="mt-6 flex flex-wrap items-center gap-3 pt-2 border-t border-hairline">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className={cn(
-                'focus-ring inline-flex w-fit items-center gap-1.5 rounded-full border px-3.5 py-2 text-caption font-semibold transition-all duration-300',
-                'border-white/[0.12] bg-white/[0.06] text-white hover:-translate-y-0.5 hover:border-cyan-300/[0.45] hover:bg-cyan-300/[0.12] hover:text-cyan-100'
-              )}
+              className="focus-ring inline-flex items-center gap-1.5 rounded-full border border-hairline bg-white px-4 py-2 text-xs font-semibold text-charcoal hover:border-sea-700 hover:text-sea-700 transition-colors"
             >
-              Live Website
-              <ExternalLink className="h-3.5 w-3.5" />
+              Live Product <ExternalLink className="h-3.5 w-3.5" />
             </a>
           )}
           <Link
             to={`/work/${project.slug}`}
-            className="focus-ring inline-flex w-fit items-center gap-1.5 rounded-full bg-cyan-600 px-3.5 py-2 text-caption font-semibold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-500"
+            className="focus-ring inline-flex items-center gap-1.5 rounded-full bg-sea-950 px-4 py-2 text-xs font-semibold text-white hover:bg-sea-800 transition-colors"
           >
-            Case Study
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            Case Study <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
       </div>

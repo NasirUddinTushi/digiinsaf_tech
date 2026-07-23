@@ -74,10 +74,33 @@ export default {
           amber: '#f5b021',
           red: '#f0473f',
         },
+        // New restrained light-first system (redesign, additive only — the
+        // tokens above stay untouched so pages not yet migrated keep
+        // rendering exactly as before). One blue family spanning a light
+        // surface tint through to the primary dark navy, per the approved
+        // brief. 200/900 are derived in-between stops, not in the brief.
+        sea: {
+          50: '#EAF2F6',
+          100: '#DCEAF1',
+          200: '#BFDCE8',
+          400: '#2A93B8',
+          600: '#0E7490',
+          700: '#075985',
+          800: '#073B5C',
+          900: '#052A42',
+          950: '#071A2B',
+        },
+        paper: '#F8F7F3',
+        charcoal: {
+          DEFAULT: '#12202B',
+          muted: '#5C6973',
+        },
       },
       fontFamily: {
-        heading: ['"Space Grotesk"', 'Sora', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        // Single family sitewide (redesign) — Manrope for both roles so the
+        // existing font-heading/font-body call sites repoint automatically.
+        heading: ['Manrope', 'sans-serif'],
+        body: ['Manrope', 'sans-serif'],
       },
       fontSize: {
         // Semantic type scale layered on top of Tailwind's default scale
@@ -113,6 +136,9 @@ export default {
       borderRadius: {
         xl2: '1.25rem',
         xl3: '1.75rem',
+      },
+      borderColor: {
+        hairline: 'rgba(7, 59, 92, 0.12)',
       },
       maxWidth: {
         container: '1320px',

@@ -1,27 +1,22 @@
 import { cn } from '@/utils/cn';
 
-// "Light" tones are kept as aliases of their dark counterpart — the site
-// has a single fixed dark theme now, so there's no light surface left for
-// the light variants to be designed against.
+// Flat bordered label, no glow ring. `brand`/`neutral` are for light (paper/
+// white) sections; the `OnDark` pair is for the navy hero/work/CTA sections.
 const toneStyles = {
-  neutralLight: 'border-white/[0.15] bg-white/5 text-mist-200/80',
-  neutralDark: 'border-white/[0.15] bg-white/5 text-mist-200/80',
-  cyanLight: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-400',
-  cyanDark: 'border-cyan-400/30 bg-cyan-400/10 text-cyan-400',
-  violetLight: 'border-violet-400/30 bg-violet-400/10 text-violet-400',
-  violetDark: 'border-violet-400/30 bg-violet-400/10 text-violet-400',
-  amber: 'border-signal-amber/30 bg-signal-amber/10 text-signal-amber',
+  brand: 'border-sea-100 bg-sea-50 text-sea-700',
+  neutral: 'border-hairline bg-white text-charcoal-muted',
+  brandOnDark: 'border-white/20 bg-white/10 text-white',
+  neutralOnDark: 'border-white/15 bg-white/5 text-white/70',
 };
 
-// Small pill/label primitive — replaces the ad hoc <span> tags previously
-// hand-styled per usage (eyebrow tags, "Demo project" flags, category tags,
-// tech-stack chips). Set uppercase={false} for chips holding proper nouns
-// (e.g. "React", "Node.js") that shouldn't be shouty.
-export default function Badge({ tone = 'neutralLight', uppercase = true, className, children }) {
+// Small pill/label primitive — eyebrow tags, category tags, tech-stack
+// chips. Set uppercase={false} for chips holding proper nouns (e.g. "React")
+// that shouldn't be shouty.
+export default function Badge({ tone = 'brand', uppercase = true, className, children }) {
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-caption font-medium tracking-wider',
+        'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-caption font-semibold tracking-wider',
         uppercase && 'uppercase',
         toneStyles[tone],
         className

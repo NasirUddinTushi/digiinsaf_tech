@@ -14,16 +14,14 @@ const iconSizeStyles = {
 };
 
 const toneStyles = {
-  cyanLight: 'bg-white/10 text-cyan-400',
-  cyanDark: 'bg-white/10 text-cyan-400',
-  violetLight: 'bg-white/10 text-violet-400',
-  violetDark: 'bg-white/10 text-violet-400',
+  brand: 'bg-sea-50 text-sea-700',
+  brandOnDark: 'bg-white/10 text-sea-400',
 };
 
 // The "icon inside a tinted rounded tile" pattern, previously duplicated
 // with slightly different sizes/colors across ValueCard, ServiceCard,
 // IndustryCard, AboutPreview and EngagementModels.
-export default function IconBadge({ name, tone = 'cyanLight', size = 'md', className }) {
+export default function IconBadge({ name, tone = 'brand', size = 'md', className }) {
   return (
     <div
       className={cn(

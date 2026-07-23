@@ -4,7 +4,7 @@ import { cn } from '@/utils/cn';
 export default function ChatFeedbackButtons({ feedback, onRate }) {
   if (feedback) {
     return (
-      <p className="mt-2 flex items-center gap-1.5 text-xs text-graphite-400">
+      <p className="mt-2 flex items-center gap-1.5 text-xs text-charcoal-muted">
         <Check className="h-3.5 w-3.5" /> Thanks for the feedback
       </p>
     );
@@ -12,12 +12,12 @@ export default function ChatFeedbackButtons({ feedback, onRate }) {
 
   return (
     <div className="mt-2 flex items-center gap-1.5">
-      <span className="text-xs text-graphite-400">Was this helpful?</span>
+      <span className="text-xs text-charcoal-muted">Was this helpful?</span>
       <button
         type="button"
         onClick={() => onRate('helpful')}
         aria-label="Mark as helpful"
-        className={cn('focus-ring rounded-full p-1 text-graphite-400 transition-colors hover:bg-white/10 hover:text-signal-green')}
+        className={cn('focus-ring rounded-full p-1 text-charcoal-muted transition-colors hover:bg-sea-50 hover:text-signal-green')}
       >
         <ThumbsUp className="h-3.5 w-3.5" />
       </button>
@@ -25,7 +25,7 @@ export default function ChatFeedbackButtons({ feedback, onRate }) {
         type="button"
         onClick={() => onRate('not-helpful')}
         aria-label="Mark as not helpful"
-        className="focus-ring rounded-full p-1 text-graphite-400 transition-colors hover:bg-white/10 hover:text-signal-red"
+        className="focus-ring rounded-full p-1 text-charcoal-muted transition-colors hover:bg-sea-50 hover:text-signal-red"
       >
         <ThumbsDown className="h-3.5 w-3.5" />
       </button>

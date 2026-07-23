@@ -11,6 +11,8 @@ export const services = [
     slug: 'ui-ux-design',
     name: 'UI/UX Design',
     icon: 'PenTool',
+    image: '/images/services/ui-ux-design.jpg',
+    imageAlt: 'Wireframe sketches for a website layout',
     featured: true,
     shortDescription:
       'Research-led interfaces that make products easier to use and easier to launch.',
@@ -60,6 +62,8 @@ export const services = [
     slug: 'custom-website-development',
     name: 'Custom Website Development',
     icon: 'Globe',
+    image: '/images/services/custom-website-development.jpg',
+    imageAlt: 'A computer screen displaying a website homepage',
     featured: true,
     shortDescription:
       'Corporate and marketing websites that load fast and represent your business credibly.',
@@ -102,6 +106,8 @@ export const services = [
     slug: 'web-application-development',
     name: 'Web Application Development',
     icon: 'Code2',
+    image: '/images/services/web-application-development.jpg',
+    imageAlt: 'Performance analytics displayed on a laptop screen',
     featured: true,
     shortDescription:
       'Custom web applications and portals built to handle real business logic at scale.',
@@ -143,6 +149,8 @@ export const services = [
     slug: 'mobile-app-development',
     name: 'Mobile App Development',
     icon: 'Smartphone',
+    image: '/images/services/mobile-app-development.jpg',
+    imageAlt: 'A hand holding a smartphone with a blank screen',
     featured: true,
     shortDescription:
       'Cross-platform mobile apps that feel native and ship without duplicated effort.',
@@ -187,6 +195,8 @@ export const services = [
     slug: 'saas-crm-development',
     name: 'SaaS and CRM Development',
     icon: 'LayoutDashboard',
+    image: '/images/services/saas-crm-development.jpg',
+    imageAlt: 'A data reporting dashboard on a laptop screen',
     featured: true,
     shortDescription:
       'Multi-tenant platforms and CRMs built to handle real usage, roles and growth.',
@@ -230,6 +240,8 @@ export const services = [
     slug: 'ai-integration-automation',
     name: 'AI Integration and Automation',
     icon: 'Sparkles',
+    image: '/images/services/ai-integration-automation.jpg',
+    imageAlt: 'Close-up of interlocking mechanical gears',
     featured: true,
     shortDescription:
       'Practical AI, machine learning and workflow automation that removes real friction — not novelty add-ons.',
@@ -299,6 +311,8 @@ export const services = [
     slug: 'ecommerce-development',
     name: 'E-commerce Development',
     icon: 'ShoppingCart',
+    image: '/images/services/ecommerce-development.jpg',
+    imageAlt: 'A cardboard shipping box sealed with fragile tape',
     featured: false,
     shortDescription:
       'Online stores built to convert, from product catalogue to checkout.',
@@ -341,6 +355,8 @@ export const services = [
     slug: 'cms-low-code-development',
     name: 'CMS and Low-Code Development',
     icon: 'Layers',
+    image: '/images/services/cms-low-code-development.jpg',
+    imageAlt: 'A computer monitor displaying a webpage',
     featured: false,
     shortDescription:
       'Content platforms on the CMS or low-code tool that fits your team, not ours.',
@@ -375,6 +391,8 @@ export const services = [
     slug: 'cloud-devops',
     name: 'Cloud and DevOps',
     icon: 'CloudCog',
+    image: '/images/services/cloud-devops.jpg',
+    imageAlt: 'Network cables and server infrastructure equipment',
     featured: false,
     shortDescription:
       'Reliable cloud infrastructure and deployment pipelines set up right the first time.',
@@ -409,6 +427,8 @@ export const services = [
     slug: 'maintenance-technical-support',
     name: 'Maintenance and Technical Support',
     icon: 'LifeBuoy',
+    image: '/images/services/maintenance-technical-support.jpg',
+    imageAlt: 'Circuit board repair with a screwdriver',
     featured: false,
     shortDescription:
       'Ongoing monitoring, updates and support so your product stays healthy after launch.',
@@ -443,6 +463,8 @@ export const services = [
     slug: 'it-consulting',
     name: 'IT Consulting',
     icon: 'Briefcase',
+    image: '/images/services/it-consulting.jpg',
+    imageAlt: 'A presenter showing charts to colleagues in a meeting',
     featured: false,
     shortDescription:
       'Independent technical guidance before you commit budget or a team to a build.',
@@ -476,6 +498,8 @@ export const services = [
     slug: 'branding-digital-strategy',
     name: 'Branding and Digital Strategy',
     icon: 'Compass',
+    image: '/images/services/branding-digital-strategy.jpg',
+    imageAlt: 'A designer sketching design concepts on paper',
     featured: true,
     shortDescription:
       'Clear brand direction and product strategy that give a project focus before it starts.',

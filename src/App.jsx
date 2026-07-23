@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
 import PageTransition from '@/components/common/PageTransition';
-import IntroSplash from '@/components/common/IntroSplash';
+import SplashScreen from '@/components/common/SplashScreen';
 import WhatsAppButton from '@/components/common/WhatsAppButton';
 import ChatbotWidget from '@/components/chatbot/ChatbotWidget';
 import ChatbotErrorBoundary from '@/components/chatbot/ChatbotErrorBoundary';
@@ -158,7 +158,7 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <IntroSplash />
+      <SplashScreen />
       <AnimatedRoutes />
       <WhatsAppButton />
       <ChatbotErrorBoundary>

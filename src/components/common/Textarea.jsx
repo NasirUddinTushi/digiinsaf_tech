@@ -11,9 +11,9 @@ const Textarea = forwardRef(function Textarea(
   return (
     <div className="w-full">
       {label && (
-        <label htmlFor={inputId} className="mb-1.5 block text-sm font-medium text-white">
+        <label htmlFor={inputId} className="mb-1.5 block text-sm font-medium text-charcoal">
           {label}
-          {required && <span className="text-cyan-400"> *</span>}
+          {required && <span className="text-sea-700"> *</span>}
         </label>
       )}
       <textarea
@@ -23,19 +23,19 @@ const Textarea = forwardRef(function Textarea(
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
         className={cn(
-          'focus-ring w-full resize-y rounded-xl2 border bg-white/5 px-4 py-3 text-body-sm text-white placeholder:text-graphite-600 transition-colors',
-          error ? 'border-signal-red/70' : 'border-white/15 hover:border-cyan-400/40',
+          'focus-ring w-full resize-y rounded-xl2 border bg-white px-4 py-3 text-body-sm text-charcoal placeholder:text-charcoal-muted/60 transition-colors',
+          error ? 'border-red-500/70' : 'border-hairline hover:border-sea-700/40',
           className
         )}
         {...rest}
       />
       {hint && !error && (
-        <p id={`${inputId}-hint`} className="mt-1.5 text-caption text-graphite-500">
+        <p id={`${inputId}-hint`} className="mt-1.5 text-caption text-charcoal-muted">
           {hint}
         </p>
       )}
       {error && (
-        <p id={`${inputId}-error`} className="mt-1.5 text-caption text-signal-red">
+        <p id={`${inputId}-error`} className="mt-1.5 text-caption text-red-600">
           {error}
         </p>
       )}

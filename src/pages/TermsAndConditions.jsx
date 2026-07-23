@@ -32,12 +32,12 @@ export default function TermsAndConditions() {
   return (
     <>
       <SEO title="Terms & Conditions" description="Terms and conditions for using the Digiinsaf website." />
-      <section className="container-xl bg-ink-900 max-w-3xl py-16 sm:py-24">
-        <p className="mb-4 inline-block rounded-full bg-amber-400/10 px-3.5 py-1.5 text-xs font-semibold text-amber-400">
+      <section className="container-xl max-w-3xl bg-paper pb-16 pt-28 sm:pb-24 sm:pt-36">
+        <p className="mb-4 inline-block rounded-full border border-hairline bg-white px-3.5 py-1.5 text-caption font-semibold text-charcoal-muted">
           {siteConfig.legalNotice}
         </p>
-        <h1 className="mb-6 text-3xl font-semibold text-white sm:text-4xl">Terms & Conditions</h1>
-        <p className="mb-10 text-sm text-graphite-500">
+        <h1 className="mb-6 text-3xl font-semibold text-charcoal sm:text-4xl">Terms & Conditions</h1>
+        <p className="mb-10 text-sm text-charcoal-muted">
           This draft outlines the structure a full terms and conditions document should follow. It is
           provided as a starting point only and must be reviewed and completed by a qualified legal
           professional before publication.
@@ -46,15 +46,15 @@ export default function TermsAndConditions() {
         <div className="space-y-8">
           {sections.map((section) => (
             <div key={section.title}>
-              <h2 className="mb-2 text-xl font-semibold text-white">{section.title}</h2>
-              <p className="text-sm leading-relaxed text-graphite-500">{section.body}</p>
+              <h2 className="mb-2 text-xl font-semibold text-charcoal">{section.title}</h2>
+              <p className="text-sm leading-relaxed text-charcoal-muted">{section.body}</p>
             </div>
           ))}
         </div>
 
-        <p className="mt-12 text-sm text-graphite-500">
+        <p className="mt-12 text-sm text-charcoal-muted">
           Questions about this draft can be directed to{' '}
-          <a href={`mailto:${siteConfig.contact.email}`} className="focus-ring rounded font-medium text-cyan-400">
+          <a href={`mailto:${siteConfig.contact.email}`} className="focus-ring rounded font-medium text-sea-700">
             {siteConfig.contact.email}
           </a>
           .

@@ -1,42 +1,38 @@
 import SEO from '@/components/common/SEO';
 import HeroSection from '@/components/home/HeroSection';
-import HomeImpactStrip from '@/components/home/HomeImpactStrip';
-import TrustedApproach from '@/components/home/TrustedApproach';
+import TrustStrip from '@/components/home/TrustStrip';
 import ServicesSection from '@/components/home/ServicesSection';
-import SolutionsSection from '@/components/home/SolutionsSection';
 import WorkSection from '@/components/home/WorkSection';
+import WhyDigiInsaf from '@/components/home/WhyDigiInsaf';
+import EngagementModels from '@/components/home/EngagementModels';
+import ProjectEstimator from '@/components/forms/ProjectEstimator';
 import ProcessSection from '@/components/home/ProcessSection';
-import WhyChooseUs from '@/components/home/WhyChooseUs';
 import TechStrip from '@/components/home/TechStrip';
 import AboutPreview from '@/components/home/AboutPreview';
-import EngagementModels from '@/components/home/EngagementModels';
-import DigiAssistantPromo from '@/components/home/DigiAssistantPromo';
-import FAQSection from '@/components/home/FAQSection';
+import BlogPreview from '@/components/home/BlogPreview';
 import CTASection from '@/components/common/CTASection';
 
 export default function Home() {
   return (
     <>
       <SEO
-        title="Building Future-Ready Digital Products"
-        description="Digiinsaf helps startups and businesses design, build and launch secure, scalable and user-focused websites, web applications, mobile apps and AI-powered solutions."
+        title="Digital Product Partner, Estonia"
+        description="DigiInsaf helps startups and growing companies design, develop and improve reliable web platforms, mobile applications and intelligent business solutions."
       />
       <HeroSection />
+      <TrustStrip />
       <ServicesSection />
+      <div className="container-xl py-12">
+        <ProjectEstimator />
+      </div>
       <WorkSection />
-      <HomeImpactStrip />
-      <TrustedApproach />
-      <SolutionsSection />
+      <WhyDigiInsaf />
+      <EngagementModels />
       <ProcessSection />
-      <WhyChooseUs />
       <TechStrip />
       <AboutPreview />
-      <EngagementModels />
-      <DigiAssistantPromo />
-      <FAQSection />
-      <div className="py-20 sm:py-28">
-        <CTASection />
-      </div>
+      <BlogPreview />
+      <CTASection />
     </>
   );
 }

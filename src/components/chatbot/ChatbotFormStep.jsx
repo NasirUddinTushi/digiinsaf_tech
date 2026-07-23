@@ -7,7 +7,7 @@ import { cn } from '@/utils/cn';
 export default function ChatbotFormStep({ step, pendingMultiChoice, disabled, onChoose, onToggleMultiChoice, onConfirmMultiChoice, onAcceptConsent }) {
   if (step.inputType === 'choice') {
     return (
-      <div className="border-t border-white/10 p-3">
+      <div className="border-t border-hairline p-3">
         <div className="grid grid-cols-2 gap-2">
           {step.options.map((option) => (
             <button
@@ -15,7 +15,7 @@ export default function ChatbotFormStep({ step, pendingMultiChoice, disabled, on
               type="button"
               disabled={disabled}
               onClick={() => onChoose(option)}
-              className="focus-ring rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-left text-xs font-medium text-white transition-colors hover:border-cyan-400/40 disabled:opacity-50"
+              className="focus-ring rounded-xl border border-hairline bg-white px-3 py-2 text-left text-xs font-medium text-charcoal transition-colors hover:border-sea-700/40 disabled:opacity-50"
             >
               {option.label}
             </button>
@@ -27,7 +27,7 @@ export default function ChatbotFormStep({ step, pendingMultiChoice, disabled, on
 
   if (step.inputType === 'multi-choice') {
     return (
-      <div className="border-t border-white/10 p-3">
+      <div className="border-t border-hairline p-3">
         <div className="grid grid-cols-2 gap-2">
           {step.options.map((option) => {
             const selected = pendingMultiChoice?.includes(option.value);
@@ -40,10 +40,10 @@ export default function ChatbotFormStep({ step, pendingMultiChoice, disabled, on
                 onClick={() => onToggleMultiChoice(option)}
                 className={cn(
                   'focus-ring flex items-center gap-1.5 rounded-xl border px-3 py-2 text-left text-xs font-medium transition-colors disabled:opacity-50',
-                  selected ? 'border-cyan-400 bg-cyan-500/10 text-white' : 'border-white/15 bg-white/5 text-white hover:border-cyan-400/40'
+                  selected ? 'border-sea-700 bg-sea-50 text-charcoal' : 'border-hairline bg-white text-charcoal hover:border-sea-700/40'
                 )}
               >
-                {selected && <Check className="h-3 w-3 flex-shrink-0 text-cyan-400" />}
+                {selected && <Check className="h-3 w-3 flex-shrink-0 text-sea-700" />}
                 {option.label}
               </button>
             );
@@ -53,7 +53,7 @@ export default function ChatbotFormStep({ step, pendingMultiChoice, disabled, on
           type="button"
           disabled={disabled}
           onClick={onConfirmMultiChoice}
-          className="focus-ring mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-cta-gradient px-4 py-2.5 text-sm font-medium text-white disabled:opacity-60"
+          className="focus-ring mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-sea-700 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sea-800 disabled:opacity-60"
         >
           Continue
         </button>
@@ -63,12 +63,12 @@ export default function ChatbotFormStep({ step, pendingMultiChoice, disabled, on
 
   if (step.inputType === 'consent') {
     return (
-      <div className="border-t border-white/10 p-3">
+      <div className="border-t border-hairline p-3">
         <button
           type="button"
           disabled={disabled}
           onClick={onAcceptConsent}
-          className="focus-ring flex w-full items-center justify-center gap-2 rounded-xl bg-cta-gradient px-4 py-2.5 text-sm font-medium text-white disabled:opacity-60"
+          className="focus-ring flex w-full items-center justify-center gap-2 rounded-xl bg-sea-700 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sea-800 disabled:opacity-60"
         >
           <ShieldCheck className="h-4 w-4" />
           I Agree & Submit

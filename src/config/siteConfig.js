@@ -40,13 +40,15 @@ export const siteConfig = {
   },
 
   nav: {
+    // Trimmed primary bar (redesign) — Solutions and Careers stay live
+    // routes, just reachable from the footer instead, per the brief's
+    // "don't overcrowd the navigation" rule.
     primary: [
       { label: 'Services', to: '/services', hasDropdown: true },
-      { label: 'Solutions', to: '/solutions' },
       { label: 'Work', to: '/work' },
       { label: 'Process', to: '/process' },
       { label: 'About', to: '/about' },
-      { label: 'Careers', to: '/careers' },
+      { label: 'Insights', to: '/insights' },
       { label: 'Contact', to: '/contact' },
     ],
     footer: {
@@ -63,6 +65,7 @@ export const siteConfig = {
         { label: 'About Digiinsaf', to: '/about' },
         { label: 'Our Work', to: '/work' },
         { label: 'Our Process', to: '/process' },
+        { label: 'Solutions', to: '/solutions' },
         { label: 'Insights', to: '/insights' },
         { label: 'Careers', to: '/careers' },
         { label: 'Contact', to: '/contact' },

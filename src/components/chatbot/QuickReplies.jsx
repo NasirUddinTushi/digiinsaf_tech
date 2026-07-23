@@ -9,7 +9,7 @@ export default function QuickReplies({ replies, onSelect, disabled }) {
           type="button"
           disabled={disabled}
           onClick={() => onSelect(reply)}
-          className="focus-ring rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3.5 py-1.5 text-xs font-medium text-cyan-300 transition-colors hover:bg-cyan-500/15 disabled:cursor-not-allowed disabled:opacity-50"
+          className="focus-ring rounded-full border border-sea-100 bg-sea-50 px-3.5 py-1.5 text-xs font-medium text-sea-700 transition-colors hover:bg-sea-100 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {reply.label}
         </button>

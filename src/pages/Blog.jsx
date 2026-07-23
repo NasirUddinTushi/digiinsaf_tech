@@ -1,10 +1,10 @@
-﻿import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import SEO from '@/components/common/SEO';
-import Breadcrumb from '@/components/common/Breadcrumb';
+import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
+import Section from '@/components/common/Section';
 import BlogCard from '@/components/cards/BlogCard';
 import EmptyState from '@/components/common/EmptyState';
 import NewsletterForm from '@/components/forms/NewsletterForm';
@@ -29,47 +29,42 @@ export default function Blog() {
     <>
       <SEO
         title="Insights"
-        description="Practical thinking on digital product strategy, engineering and design from the Digiinsaf team."
+        description="Practical thinking on digital product strategy, engineering and design from the DigiInsaf team."
       />
 
-      <section className="theme-page-header bg-ink-950 pb-16 pt-10 sm:pb-24 sm:pt-14">
-        <div className="container-xl">
-          <Breadcrumb tone="dark" items={[{ label: 'Home', to: '/' }, { label: 'Insights' }]} />
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="mt-8 max-w-2xl"
-          >
-            <h1 className="text-4xl font-semibold text-white sm:text-5xl">Insights</h1>
-            <p className="mt-5 text-lg text-mist-200/75">
-              Practical notes on planning, designing and building digital products well.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        breadcrumbItems={[{ label: 'Home', to: '/' }, { label: 'Insights' }]}
+        eyebrow="Insights"
+        title="Insights"
+        description="Practical notes on planning, designing and building digital products well."
+        tone="navy"
+        backgroundImage="/images/blog-writing.jpg"
+        imageAlt="A person writing in a notebook next to a laptop"
+      />
 
-      <section className="container-xl bg-ink-900 py-20 sm:py-24">
+      <Section tone="surface" spacing="tight">
         <Link
           to={`/insights/${featuredPost.slug}`}
-          className="focus-ring group grid gap-8 rounded-xl2 border border-white/10 bg-white/[0.04] p-8 transition-all hover:-translate-y-0.5 hover:shadow-card-dark lg:grid-cols-[1fr_1.2fr] lg:p-10"
+          className="focus-ring group grid gap-8 rounded-2xl border border-hairline bg-white p-8 transition-shadow hover:shadow-elevation-md lg:grid-cols-[1fr_1.2fr] lg:p-10"
         >
-          <div className="flex h-48 items-center justify-center rounded-xl2 bg-gradient-to-br from-ink-800 to-violet-600 lg:h-full">
-            <span className="text-xs font-semibold uppercase tracking-widest text-white/70">Featured — {featuredPost.category}</span>
+          <div className="flex h-48 items-center justify-center rounded-xl2 border border-hairline bg-sea-50 lg:h-full">
+            <span className="text-caption font-semibold uppercase tracking-widest text-sea-700">
+              Featured — {featuredPost.category}
+            </span>
           </div>
           <div className="flex flex-col justify-center">
-            <p className="mb-2 text-xs text-graphite-400">
+            <p className="mb-2 text-caption text-charcoal-muted">
               {new Date(featuredPost.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} · {featuredPost.readTime}
             </p>
-            <h2 className="mb-3 text-2xl font-semibold text-white group-hover:text-cyan-400 sm:text-3xl">
+            <h2 className="mb-3 text-2xl font-semibold text-charcoal group-hover:text-sea-700 sm:text-3xl">
               {featuredPost.title}
             </h2>
-            <p className="text-graphite-500">{featuredPost.excerpt}</p>
+            <p className="text-charcoal-muted">{featuredPost.excerpt}</p>
           </div>
         </Link>
-      </section>
+      </Section>
 
-      <section className="container-xl bg-ink-900 pb-20 sm:pb-28">
+      <Section tone="surface" spacing="tight">
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap gap-2" role="group" aria-label="Filter articles by category">
             {blogCategories.map((category) => (
@@ -79,10 +74,10 @@ export default function Blog() {
                 onClick={() => setActiveCategory(category)}
                 aria-pressed={activeCategory === category}
                 className={cn(
-                  'focus-ring rounded-full border px-4 py-2 text-sm font-medium transition-colors',
+                  'focus-ring rounded-full border px-4 py-2 text-body-sm font-medium transition-colors',
                   activeCategory === category
-                    ? 'border-transparent bg-cyan-600 text-white'
-                    : 'border-white/10 bg-white/[0.04] text-graphite-500 hover:border-white/20'
+                    ? 'border-sea-700 bg-sea-700 text-white'
+                    : 'border-hairline bg-white text-charcoal-muted hover:border-sea-700/40'
                 )}
               >
                 {category}
@@ -91,13 +86,13 @@ export default function Blog() {
           </div>
           <label className="relative w-full sm:w-64">
             <span className="sr-only">Search articles</span>
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-graphite-400" />
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-charcoal-muted" />
             <input
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search articles"
-              className="focus-ring w-full rounded-full border border-white/10 bg-white/[0.04] py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-graphite-500"
+              className="focus-ring w-full rounded-full border border-hairline bg-white py-2.5 pl-10 pr-4 text-body-sm text-charcoal placeholder:text-charcoal-muted"
             />
           </label>
         </div>
@@ -111,10 +106,10 @@ export default function Blog() {
             ))}
           </div>
         )}
-      </section>
+      </Section>
 
-      <section className="bg-ink-950 py-20 sm:py-24">
-        <div className="container-xl max-w-xl text-center">
+      <Section tone="navy" spacing="tight">
+        <div className="mx-auto max-w-xl text-center">
           <SectionHeading
             eyebrow="Newsletter"
             title="Occasional notes on shipping digital products well."
@@ -124,7 +119,7 @@ export default function Blog() {
           />
           <NewsletterForm />
         </div>
-      </section>
+      </Section>
     </>
   );
 }

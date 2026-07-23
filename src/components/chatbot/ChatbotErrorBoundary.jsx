@@ -25,9 +25,9 @@ export default class ChatbotErrorBoundary extends Component {
       return (
         <div
           role="status"
-          className="fixed bottom-5 right-4 z-[95] flex items-center gap-2 rounded-full border border-white/10 bg-ink-800 px-4 py-2.5 text-xs text-graphite-500 shadow-card-dark sm:right-6"
+          className="fixed bottom-5 right-4 z-[95] flex items-center gap-2 rounded-full border border-hairline bg-white px-4 py-2.5 text-xs text-charcoal-muted shadow-elevation-md sm:right-6"
         >
-          <MessageCircle className="h-4 w-4 text-graphite-400" />
+          <MessageCircle className="h-4 w-4 text-charcoal-muted" />
           Chat assistant is temporarily unavailable.
         </div>
       );

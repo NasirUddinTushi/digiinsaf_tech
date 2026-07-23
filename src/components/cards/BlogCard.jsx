@@ -7,15 +7,13 @@ export default function BlogCard({ post, index = 0 }) {
   return (
     <motion.article
       {...fadeUpViewportStagger(index)}
-      className="surface-card surface-card-interactive group flex h-full flex-col overflow-hidden"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-hairline bg-white shadow-elevation-sm transition-shadow duration-300 hover:shadow-elevation-md"
     >
-      <div className="flex h-36 items-center justify-center bg-gradient-to-br from-ink-800 to-violet-600 px-6">
-        <span className="text-caption font-semibold uppercase tracking-widest text-white/70">
-          {post.category}
-        </span>
+      <div className="flex h-32 items-center border-b border-hairline bg-sea-50 px-6">
+        <span className="text-caption font-semibold uppercase tracking-widest text-sea-700">{post.category}</span>
       </div>
       <div className="flex flex-1 flex-col p-6">
-        <p className="mb-2 text-caption text-graphite-400">
+        <p className="mb-2 text-caption text-charcoal-muted">
           {new Date(post.publishedAt).toLocaleDateString('en-GB', {
             day: 'numeric',
             month: 'short',
@@ -23,11 +21,11 @@ export default function BlogCard({ post, index = 0 }) {
           })}{' '}
           · {post.readTime}
         </p>
-        <h3 className="mb-2 text-lg font-semibold leading-snug text-white">{post.title}</h3>
-        <p className="mb-5 flex-1 text-body-sm leading-relaxed text-muted-onlight">{post.excerpt}</p>
+        <h3 className="mb-2 text-lg font-semibold leading-snug text-charcoal">{post.title}</h3>
+        <p className="mb-5 flex-1 text-body-sm leading-relaxed text-charcoal-muted">{post.excerpt}</p>
         <Link
           to={`/insights/${post.slug}`}
-          className="focus-ring inline-flex w-fit items-center gap-1.5 rounded text-body-sm font-medium text-white transition-colors group-hover:text-cyan-400"
+          className="focus-ring inline-flex w-fit items-center gap-1.5 rounded text-body-sm font-semibold text-sea-700 transition-colors group-hover:text-sea-800"
         >
           Read Article
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

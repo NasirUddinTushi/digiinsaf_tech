@@ -41,12 +41,12 @@ export default function ChatbotNotification({ show, greeting, onOpen }) {
           initial={{ opacity: 0, y: 8, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 8, scale: 0.95 }}
-          className="relative max-w-[220px] rounded-2xl rounded-br-sm border border-white/10 bg-ink-800 pr-7 shadow-card-dark"
+          className="relative max-w-[220px] rounded-2xl rounded-br-sm border border-hairline bg-white pr-7 shadow-elevation-md"
         >
           <button
             type="button"
             onClick={onOpen}
-            className="focus-ring w-full rounded-2xl px-4 py-3 text-left text-sm text-white"
+            className="focus-ring w-full rounded-2xl px-4 py-3 text-left text-sm text-charcoal"
           >
             {greeting}
           </button>
@@ -54,7 +54,7 @@ export default function ChatbotNotification({ show, greeting, onOpen }) {
             type="button"
             onClick={dismiss}
             aria-label="Dismiss notification"
-            className="focus-ring absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-graphite-400 hover:bg-white/10 hover:text-white"
+            className="focus-ring absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-charcoal-muted hover:bg-sea-50 hover:text-charcoal"
           >
             <X className="h-3 w-3" />
           </button>

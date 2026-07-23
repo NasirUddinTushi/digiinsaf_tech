@@ -28,13 +28,13 @@ const ChatbotLauncher = forwardRef(function ChatbotLauncher({ isOpen, hasOpenedO
         aria-label={isOpen ? 'Close chat with Digi Assistant' : 'Open chat with Digi Assistant'}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
-        className="focus-ring relative flex h-14 w-14 items-center justify-center rounded-full bg-cta-gradient text-white shadow-glow"
+        className="focus-ring relative flex h-14 w-14 items-center justify-center rounded-full bg-sea-700 text-white shadow-elevation-md transition-colors hover:bg-sea-800"
       >
         {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
         {!hasOpenedOnce && !isOpen && (
           <span
             aria-hidden="true"
-            className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-signal-green text-[9px] font-bold text-ink-950 ring-2 ring-white"
+            className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-signal-green text-[9px] font-bold text-sea-950 ring-2 ring-white"
           >
             1
           </span>

@@ -30,18 +30,18 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div role="status" className="flex flex-col items-center gap-3 rounded-xl2 border border-white/10 bg-white/[0.04] p-8 text-center">
+      <div role="status" className="flex flex-col items-center gap-3 rounded-xl2 border border-hairline bg-white p-8 text-center shadow-elevation-sm">
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-signal-green/10 text-signal-green">
           <CheckCircle2 className="h-6 w-6" />
         </span>
-        <h3 className="text-lg font-semibold text-white">Message sent</h3>
-        <p className="text-sm text-graphite-500">Thanks for reaching out — we will reply within two business days.</p>
+        <h3 className="text-lg font-semibold text-charcoal">Message sent</h3>
+        <p className="text-sm text-charcoal-muted">Thanks for reaching out — we will reply within two business days.</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5 rounded-xl2 border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5 rounded-xl2 border border-hairline bg-white p-6 shadow-elevation-sm sm:p-8">
       <Input label="Full name" required placeholder="Jane Doe" error={errors.fullName?.message} {...register('fullName')} />
       <Input label="Email" type="email" required placeholder="jane@company.com" error={errors.email?.message} {...register('email')} />
       <Textarea
@@ -52,7 +52,7 @@ export default function ContactForm() {
         error={errors.message?.message}
         {...register('message')}
       />
-      {status === 'error' && <p role="alert" className="text-sm text-red-500">Something went wrong. Please try again.</p>}
+      {status === 'error' && <p role="alert" className="text-sm text-red-600">Something went wrong. Please try again.</p>}
       <Button type="submit" variant="primary" size="lg" disabled={status === 'loading'} className="w-full">
         {status === 'loading' && <Loader2 className="h-4 w-4 animate-spin" />}
         Send Message

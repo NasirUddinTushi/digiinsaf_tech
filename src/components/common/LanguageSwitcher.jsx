@@ -136,6 +136,9 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
       )}
       translate="no"
     >
+      {/* Always a self-contained dark navy chip — deliberately theme-independent
+          so it reads correctly whether the navbar behind it is transparent
+          (over the home hero) or solid light (scrolled / other pages). */}
       <button
         type="button"
         id={selectId}
@@ -144,8 +147,7 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
         aria-expanded={open}
         aria-label={`Translate website. Current language: ${selected.label}`}
         className={cn(
-          'theme-lang-btn focus-ring group relative flex items-center overflow-hidden rounded-full border border-white/[0.15] bg-white/[0.07] text-sm font-semibold text-white shadow-card-dark backdrop-blur-xl transition-all duration-200 hover:border-cyan-400/[0.45] hover:bg-white/[0.1]',
-          'before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:bg-gradient-to-r before:from-cyan-400/[0.15] before:to-violet-400/10 before:opacity-0 before:transition-opacity hover:before:opacity-100',
+          'focus-ring group relative flex items-center overflow-hidden rounded-full border border-white/15 bg-sea-950 text-sm font-semibold text-white transition-colors duration-200 hover:bg-sea-800',
           isMobile ? 'h-10 w-[82px] gap-1.5 px-2.5' : 'gap-2 px-3.5 py-2.5',
           isFull && 'h-12 w-full justify-between rounded-xl px-4'
         )}
@@ -153,7 +155,7 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
         <span className="relative flex items-center gap-2">
           <span
             className={cn(
-              'flex items-center justify-center rounded-full bg-cyan-400/[0.15] text-cyan-300 ring-1 ring-cyan-300/20',
+              'flex items-center justify-center rounded-full bg-white/10 text-sea-400',
               isMobile ? 'h-6 w-6' : 'h-7 w-7'
             )}
           >
@@ -164,7 +166,7 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
           </span>
         </span>
         <ChevronDown
-          className={cn('relative h-4 w-4 text-mist-200/70 transition-transform', open && 'rotate-180')}
+          className={cn('relative h-4 w-4 text-white/60 transition-transform', open && 'rotate-180')}
           aria-hidden="true"
         />
       </button>
@@ -179,7 +181,7 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
             role="listbox"
             aria-label="Website language"
             className={cn(
-              'z-[90] overflow-hidden border border-white/[0.12] bg-ink-950 p-1.5 shadow-card-dark',
+              'z-[90] overflow-hidden border border-white/[0.12] bg-sea-950 p-1.5 shadow-elevation-lg',
               isMobile
                 ? 'fixed left-4 right-4 top-[4.75rem] grid grid-cols-2 gap-1.5 rounded-xl2 p-2'
                 : 'absolute right-0 top-full mt-2 w-52 rounded-xl',
@@ -199,16 +201,16 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
                   className={cn(
                     'focus-ring flex w-full items-center justify-between gap-3 rounded-lg px-3 text-left text-sm transition-colors',
                     isMobile ? 'min-h-12 py-2' : 'py-2.5',
-                    active ? 'bg-cyan-400/[0.15] text-white ring-1 ring-cyan-300/20' : 'text-mist-100/[0.85] hover:bg-white/[0.07] hover:text-white'
+                    active ? 'bg-white/[0.12] text-white' : 'text-white/70 hover:bg-white/[0.07] hover:text-white'
                   )}
                 >
                   <span className="flex min-w-0 items-center gap-2.5">
-                    <span className="flex h-7 w-8 items-center justify-center rounded-md bg-white/[0.07] text-xs font-semibold text-cyan-200">
+                    <span className="flex h-7 w-8 items-center justify-center rounded-md bg-white/[0.07] text-xs font-semibold text-sea-400">
                       {language.shortLabel}
                     </span>
                     <span className="truncate">{language.label}</span>
                   </span>
-                  {active && <Check className="h-4 w-4 text-cyan-300" aria-hidden="true" />}
+                  {active && <Check className="h-4 w-4 text-sea-400" aria-hidden="true" />}
                 </button>
               );
             })}

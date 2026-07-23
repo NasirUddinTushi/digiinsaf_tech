@@ -49,9 +49,9 @@ export default function ChatbotWidget() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={chatbot.open}
-          className="focus-ring fixed bottom-5 right-4 z-[95] flex items-center gap-2 rounded-full border border-white/10 bg-ink-800 px-4 py-2.5 text-sm font-medium text-white shadow-card-dark sm:right-6"
+          className="focus-ring fixed bottom-5 right-4 z-[95] flex items-center gap-2 rounded-full border border-hairline bg-white px-4 py-2.5 text-sm font-medium text-charcoal shadow-elevation-md sm:right-6"
         >
-          <MessageCircle className="h-4 w-4 text-cyan-400" />
+          <MessageCircle className="h-4 w-4 text-sea-700" />
           {chatbot.config.chatbotName}
         </motion.button>
       )}

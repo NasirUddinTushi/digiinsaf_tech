@@ -1,13 +1,18 @@
 import { cn } from '@/utils/cn';
 
-// Every tone now resolves to a dark surface (the site has a single fixed
-// dark theme) — the names are kept only so existing call sites still read
-// sensibly and so alternating sections keep some tonal variety.
+// `light`/`mist`/`white`/`dark` are the original dark-only tones — left
+// exactly as they were so pages not yet migrated to the redesign are
+// visually unaffected. `paper`/`tint`/`surface`/`navy` are the new
+// restrained system's tones, used by the redesigned homepage.
 const toneStyles = {
   light: 'bg-ink-900',
   mist: 'bg-ink-800',
   white: 'bg-ink-900',
   dark: 'bg-ink-950',
+  paper: 'bg-paper text-charcoal',
+  tint: 'bg-sea-50 text-charcoal',
+  surface: 'bg-white text-charcoal',
+  navy: 'bg-sea-950 text-white',
 };
 
 const spacingStyles = {

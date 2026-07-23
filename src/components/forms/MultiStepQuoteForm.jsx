@@ -69,12 +69,12 @@ export default function MultiStepQuoteForm() {
 
   if (status === 'success') {
     return (
-      <div role="status" className="flex flex-col items-center gap-4 rounded-xl2 border border-white/10 bg-white/[0.04] p-10 text-center">
+      <div role="status" className="flex flex-col items-center gap-4 rounded-xl2 border border-hairline bg-white p-10 text-center shadow-elevation-sm">
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-signal-green/10 text-signal-green">
           <CheckCircle2 className="h-7 w-7" />
         </span>
-        <h3 className="text-xl font-semibold text-white">Thanks — your request is in.</h3>
-        <p className="max-w-sm text-sm text-graphite-500">
+        <h3 className="text-xl font-semibold text-charcoal">Thanks — your request is in.</h3>
+        <p className="max-w-sm text-sm text-charcoal-muted">
           We will review your project details and get back to you within two business days at the
           email address you provided.
         </p>
@@ -83,18 +83,18 @@ export default function MultiStepQuoteForm() {
   }
 
   return (
-    <div className="rounded-xl2 border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+    <div className="rounded-xl2 border border-hairline bg-white p-6 shadow-elevation-sm sm:p-8">
       <ol className="mb-8 flex items-center gap-2" aria-label="Form progress">
         {steps.map((step) => (
           <li key={step.id} className="flex-1">
             <div
               className={`h-1.5 rounded-full transition-colors ${
-                step.id <= currentStep ? 'bg-cyan-500' : 'bg-white/10'
+                step.id <= currentStep ? 'bg-sea-700' : 'bg-sea-50'
               }`}
             />
             <span
               className={`mt-2 hidden text-xs font-medium sm:block ${
-                step.id === currentStep ? 'text-white' : 'text-graphite-400'
+                step.id === currentStep ? 'text-charcoal' : 'text-charcoal-muted'
               }`}
             >
               {step.label}
@@ -120,7 +120,7 @@ export default function MultiStepQuoteForm() {
         </AnimatePresence>
 
         {status === 'error' && (
-          <p role="alert" className="mt-4 text-sm text-red-500">
+          <p role="alert" className="mt-4 text-sm text-red-600">
             Something went wrong sending your request. Please try again.
           </p>
         )}

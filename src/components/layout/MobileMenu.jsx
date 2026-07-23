@@ -32,7 +32,7 @@ export default function MobileMenu({ isOpen, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[70] bg-ink-950/95 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 z-[70] bg-paper lg:hidden"
         >
           <motion.div
             ref={panelRef}
@@ -48,45 +48,34 @@ export default function MobileMenu({ isOpen, onClose }) {
           >
             <div className="mb-10 flex items-center justify-between">
               <Link to="/" onClick={onClose} className="focus-ring flex items-center rounded">
-                <BrandName />
+                <BrandName onDark={false} />
               </Link>
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close menu"
-                className="focus-ring flex h-10 w-10 items-center justify-center rounded-full text-white"
+                className="focus-ring flex h-10 w-10 items-center justify-center rounded-full text-charcoal"
               >
                 <X className="h-6 w-6" />
               </button>
             </div>
 
             <nav className="flex flex-1 flex-col gap-1" aria-label="Mobile primary">
-              {siteConfig.nav.primary.map((item) =>
-                item.to.includes('#') ? (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    onClick={onClose}
-                    className="focus-ring rounded-xl px-4 py-3.5 text-lg font-medium text-mist-100/90 transition-colors hover:bg-white/5 hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <NavLink
-                    key={item.to}
-                    to={item.to}
-                    onClick={onClose}
-                    className={({ isActive }) =>
-                      cn(
-                        'focus-ring rounded-xl px-4 py-3.5 text-lg font-medium text-mist-100/90 transition-colors hover:bg-white/5 hover:text-white',
-                        isActive && 'bg-white/5 text-white'
-                      )
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
-                )
-              )}
+              {siteConfig.nav.primary.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    cn(
+                      'focus-ring rounded-xl px-4 py-3.5 text-lg font-medium text-charcoal-muted transition-colors hover:bg-sea-50 hover:text-charcoal',
+                      isActive && 'bg-sea-50 text-charcoal'
+                    )
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
             </nav>
 
             <div className="mt-8 flex flex-col gap-3">
@@ -94,7 +83,7 @@ export default function MobileMenu({ isOpen, onClose }) {
               <Button to="/contact" onClick={onClose} variant="primary" size="lg" className="w-full">
                 {siteConfig.cta.primary}
               </Button>
-              <p className="text-center text-xs text-mist-200/60">{siteConfig.company.locationLabel}</p>
+              <p className="text-center text-xs text-charcoal-muted">{siteConfig.company.locationLabel}</p>
             </div>
           </motion.div>
         </motion.div>

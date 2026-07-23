@@ -22,16 +22,23 @@ const taglineSizes = {
 
 // Icon-left, name-over-tagline lockup — replaces the earlier single-line
 // stylised wordmark with a plainer two-line brand block (logo mark, then
-// the brand name with its tagline stacked underneath).
-export default function BrandName({ size = 'sm', className }) {
+// the brand name with its tagline stacked underneath). `onDark` controls
+// text color so the same lockup works on the transparent-over-hero navbar
+// state and on solid light/dark surfaces.
+export default function BrandName({ size = 'sm', onDark = true, className }) {
   return (
     <span className={cn('inline-flex flex-shrink-0 items-center gap-2.5', className)}>
       <Logo className={logoSizes[size]} />
       <span className="flex flex-col leading-tight">
-        <span className={cn('notranslate font-heading font-bold text-white', nameSizes[size])} translate="no">
+        <span
+          className={cn('notranslate font-heading font-bold', onDark ? 'text-white' : 'text-charcoal', nameSizes[size])}
+          translate="no"
+        >
           {siteConfig.brand.name}
         </span>
-        <span className={cn('hidden font-medium text-cyan-300 lg:block', taglineSizes[size])}>{siteConfig.brand.tagline}</span>
+        <span className={cn('hidden font-medium lg:block', onDark ? 'text-sea-400' : 'text-sea-700', taglineSizes[size])}>
+          {siteConfig.brand.tagline}
+        </span>
       </span>
     </span>
   );

@@ -25,7 +25,7 @@ export default function ChatMessageList({ chatbot }) {
               key={faq.id}
               type="button"
               onClick={() => sendMessage(faq.question)}
-              className="focus-ring rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs text-graphite-500 transition-colors hover:border-cyan-400/40 hover:text-white"
+              className="focus-ring rounded-full border border-hairline bg-paper px-3 py-1.5 text-xs text-charcoal-muted transition-colors hover:border-sea-700/40 hover:text-charcoal"
             >
               {faq.question}
             </button>

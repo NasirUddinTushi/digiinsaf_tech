@@ -5,7 +5,7 @@ import ScrollToTop from '@/components/common/ScrollToTop';
 
 export default function Layout() {
   return (
-    <div className="flex min-h-screen flex-col bg-ink-950">
+    <div className="flex min-h-screen flex-col bg-paper">
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
