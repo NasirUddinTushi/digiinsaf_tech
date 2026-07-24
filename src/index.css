@@ -177,6 +177,55 @@
   animation: meshDrift 12s ease-in-out infinite;
 }
 
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Glow pulse for CTA buttons */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px -5px rgba(46, 125, 186, 0.4); }
+  50% { box-shadow: 0 0 40px -5px rgba(46, 125, 186, 0.7); }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
 .shadow-neon-cyan {
   box-shadow: 0 0 35px -5px rgba(46, 125, 186, 0.4);
 }
@@ -200,30 +249,57 @@
   left: 0;
 }
 
+/* ─── Google Translate: suppress toolbar chrome only ─────────────────── */
+
+/* Hide the visual GT toolbar, banner iframe, and tooltip popups */
 .language-switcher #google_translate_element,
 .goog-te-banner-frame,
 .goog-te-banner-frame.skiptranslate,
 .skiptranslate iframe,
 iframe.skiptranslate,
-.goog-te-gadget,
 .goog-te-balloon-frame,
-#goog-gt-tt {
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
   display: none !important;
   visibility: hidden !important;
   height: 0 !important;
+  max-height: 0 !important;
+  box-shadow: none !important;
 }
 
+/* Keep .goog-te-gadget off-screen (NOT display:none) so
+   its internal <select> stays accessible for programmatic dispatch */
+.goog-te-gadget {
+  position: absolute !important;
+  left: -9999px !important;
+  top: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Prevent GT from pushing html/body down by 40px for its toolbar.
+   Only reset margin/top — do NOT override position, that breaks GT rendering. */
 html.translated-ltr,
-html.translated-rtl,
-body {
+html.translated-rtl {
+  margin-top: 0 !important;
+}
+
+html.translated-ltr body,
+html.translated-rtl body {
   top: 0 !important;
   margin-top: 0 !important;
 }
 
+/* Global box-sizing */
 * {
   box-sizing: border-box;
 }
 
+/* Clip horizontal overflow without breaking sticky headers */
 html,
 body,
 #root {

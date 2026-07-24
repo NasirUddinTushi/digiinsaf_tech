@@ -1,34 +1,41 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
 
-// Resets scroll position on every route change so navigating between
-// pages does not carry over the previous page's scroll offset. When the
-// URL includes a hash (e.g. an in-page link like "/#solutions"), scrolls
-// to that section instead — React Router's client-side navigation doesn't
-// trigger the browser's native hash-scroll behaviour on its own.
 export default function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (hash) {
-      const id = hash.replace('#', '');
-      const scrollToHash = () => {
-        const el = document.getElementById(id);
-        if (!el) return false;
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return true;
-      };
-      // The target section may not be mounted yet right after a cross-page
-      // navigation, so retry once shortly instead of failing silently.
-      if (!scrollToHash()) {
-        const timer = setTimeout(scrollToHash, 150);
-        return () => clearTimeout(timer);
-      }
-      return undefined;
-    }
-    window.scrollTo(0, 0);
-    return undefined;
-  }, [pathname, hash]);
+    const onScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-  return null;
+  const scrollUp = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.5, y: 20 }}
+          transition={{ duration: 0.3, ease: 'backOut' }}
+          whileHover={{ scale: 1.1, y: -3 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={scrollUp}
+          aria-label="Scroll to top"
+          className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-sea-950 text-white shadow-[0_0_30px_-4px_rgba(46,125,186,0.6)] border border-white/10 backdrop-blur-md hover:bg-sea-800 transition-colors"
+        >
+          {/* Animated pulsing ring */}
+          <motion.span
+            className="absolute inset-0 rounded-full border-2 border-cyan-400/40"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <ArrowUp className="h-5 w-5" />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
 }

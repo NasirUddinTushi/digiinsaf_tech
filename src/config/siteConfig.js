@@ -1,4 +1,4 @@
-﻿// Single source of truth for brand, contact and navigation content.
+// Single source of truth for brand, contact and navigation content.
 // Update this file to change copy that appears across the whole site.
 
 export const siteConfig = {
@@ -45,6 +45,7 @@ export const siteConfig = {
     // "don't overcrowd the navigation" rule.
     primary: [
       { label: 'Services', to: '/services', hasDropdown: true },
+      { label: 'Products', to: '/products', hasDropdown: true },
       { label: 'Work', to: '/work' },
       { label: 'Process', to: '/process' },
       { label: 'About', to: '/about' },
@@ -60,6 +61,10 @@ export const siteConfig = {
         { label: 'SaaS and CRM Development', to: '/services/saas-crm-development' },
         { label: 'AI Integration and Automation', to: '/services/ai-integration-automation' },
         { label: 'Branding and Digital Strategy', to: '/services/branding-digital-strategy' },
+      ],
+      products: [
+        { label: 'DigiFlow SaaS Platform', to: '/products' },
+        { label: 'InsafCRM SaaS', to: '/products' },
       ],
       company: [
         { label: 'About Digiinsaf', to: '/about' },

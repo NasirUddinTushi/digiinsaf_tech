@@ -1,15 +1,12 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, BookOpen, ArrowUpRight, Clock, Tag } from 'lucide-react';
 import SEO from '@/components/common/SEO';
-import PageHero from '@/components/common/PageHero';
-import SectionHeading from '@/components/common/SectionHeading';
-import Section from '@/components/common/Section';
 import BlogCard from '@/components/cards/BlogCard';
 import EmptyState from '@/components/common/EmptyState';
 import NewsletterForm from '@/components/forms/NewsletterForm';
 import { blogs, blogCategories } from '@/data/blogs';
-import { cn } from '@/utils/cn';
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -27,99 +24,150 @@ export default function Blog() {
 
   return (
     <>
-      <SEO
-        title="Insights"
-        description="Practical thinking on digital product strategy, engineering and design from the DigiInsaf team."
-      />
+      <SEO title="Insights" description="Practical thinking on digital product strategy, engineering and design from the DigiInsaf team." />
 
-      <PageHero
-        breadcrumbItems={[{ label: 'Home', to: '/' }, { label: 'Insights' }]}
-        eyebrow="Insights"
-        title="Insights"
-        description="Practical notes on planning, designing and building digital products well."
-        tone="navy"
-        backgroundImage="/images/blog-writing.jpg"
-        imageAlt="A person writing in a notebook next to a laptop"
-      />
-
-      <Section tone="surface" spacing="tight">
-        <Link
-          to={`/insights/${featuredPost.slug}`}
-          className="focus-ring group grid gap-8 rounded-2xl border border-hairline bg-white p-8 transition-shadow hover:shadow-elevation-md lg:grid-cols-[1fr_1.2fr] lg:p-10"
-        >
-          <div className="flex h-48 items-center justify-center rounded-xl2 border border-hairline bg-sea-50 lg:h-full">
-            <span className="text-caption font-semibold uppercase tracking-widest text-sea-700">
-              Featured — {featuredPost.category}
-            </span>
-          </div>
-          <div className="flex flex-col justify-center">
-            <p className="mb-2 text-caption text-charcoal-muted">
-              {new Date(featuredPost.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })} · {featuredPost.readTime}
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-sea-950 pt-[clamp(64px,10vw,120px)] pb-16">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/3 w-[600px] h-[600px] rounded-full bg-cyan-600/10 blur-[140px] animate-mesh-drift" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-700/8 blur-[120px]" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '55px 55px' }} />
+        </div>
+        <div className="container-xl relative z-10">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300 mb-5">
+              <BookOpen className="h-3.5 w-3.5" /> Insights & Articles
+            </div>
+            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
+              Notes on building{' '}
+              <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
+                digital products well.
+              </span>
+            </h1>
+            <p className="mt-5 text-base text-graphite-300 sm:text-lg leading-relaxed">
+              Practical notes on planning, designing and building digital products well.
             </p>
-            <h2 className="mb-3 text-2xl font-semibold text-charcoal group-hover:text-sea-700 sm:text-3xl">
-              {featuredPost.title}
-            </h2>
-            <p className="text-charcoal-muted">{featuredPost.excerpt}</p>
-          </div>
-        </Link>
-      </Section>
-
-      <Section tone="surface" spacing="tight">
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter articles by category">
-            {blogCategories.map((category) => (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setActiveCategory(category)}
-                aria-pressed={activeCategory === category}
-                className={cn(
-                  'focus-ring rounded-full border px-4 py-2 text-body-sm font-medium transition-colors',
-                  activeCategory === category
-                    ? 'border-sea-700 bg-sea-700 text-white'
-                    : 'border-hairline bg-white text-charcoal-muted hover:border-sea-700/40'
-                )}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-          <label className="relative w-full sm:w-64">
-            <span className="sr-only">Search articles</span>
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-charcoal-muted" />
-            <input
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search articles"
-              className="focus-ring w-full rounded-full border border-hairline bg-white py-2.5 pl-10 pr-4 text-body-sm text-charcoal placeholder:text-charcoal-muted"
-            />
-          </label>
+          </motion.div>
         </div>
+      </section>
 
-        {filteredPosts.length === 0 ? (
-          <EmptyState icon="SearchX" title="No articles found" description="Try a different search term or category." />
-        ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredPosts.map((post) => (
-              <BlogCard key={post.slug} post={post} />
-            ))}
-          </div>
-        )}
-      </Section>
+      {/* Featured Post */}
+      <section className="bg-[#f8f7f3] pt-14 pb-8">
+        <div className="container-xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <span className="text-xs font-bold uppercase tracking-wider text-sea-700 mb-4 block">Featured Article</span>
+            <Link
+              to={`/insights/${featuredPost.slug}`}
+              className="group grid gap-0 overflow-hidden rounded-2xl border border-hairline bg-white shadow-elevation-md hover:shadow-elevation-lg transition-all duration-300 lg:grid-cols-[1fr_1.5fr]"
+            >
+              {/* Left: Category visual */}
+              <div className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br from-sea-900 to-sea-950 lg:h-auto">
+                <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+                <div className="relative z-10 text-center p-8">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500/20 border border-cyan-500/30">
+                    <BookOpen className="h-8 w-8 text-cyan-300" />
+                  </div>
+                  <span className="inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-cyan-300">
+                    {featuredPost.category}
+                  </span>
+                </div>
+              </div>
 
-      <Section tone="navy" spacing="tight">
-        <div className="mx-auto max-w-xl text-center">
-          <SectionHeading
-            eyebrow="Newsletter"
-            title="Occasional notes on shipping digital products well."
-            tone="dark"
-            align="center"
-            className="mb-8"
-          />
-          <NewsletterForm />
+              {/* Right: Content */}
+              <div className="flex flex-col justify-center p-8 lg:p-10">
+                <div className="flex items-center gap-3 text-xs text-charcoal-muted mb-3">
+                  <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {featuredPost.readTime}</span>
+                  <span>·</span>
+                  <span>{new Date(featuredPost.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                </div>
+                <h2 className="text-2xl font-extrabold text-charcoal group-hover:text-sea-700 transition-colors sm:text-3xl leading-snug mb-3">
+                  {featuredPost.title}
+                </h2>
+                <p className="text-sm leading-relaxed text-charcoal-muted mb-6">{featuredPost.excerpt}</p>
+                <span className="inline-flex items-center gap-1.5 text-sm font-bold text-sea-700 group-hover:text-sea-800 transition-colors">
+                  Read Article <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </span>
+              </div>
+            </Link>
+          </motion.div>
         </div>
-      </Section>
+      </section>
+
+      {/* Articles Grid */}
+      <section className="bg-[#f8f7f3] py-10">
+        <div className="container-xl">
+          {/* Filter + Search */}
+          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter articles">
+              {blogCategories.map((category) => {
+                const isActive = activeCategory === category;
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setActiveCategory(category)}
+                    aria-pressed={isActive}
+                    className={`relative rounded-full px-4 py-2 text-xs font-semibold transition-all ${
+                      isActive ? 'text-white' : 'border border-hairline bg-white text-charcoal-muted hover:border-sea-300'
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.div layoutId="blogCategoryIndicator" className="absolute inset-0 rounded-full bg-sea-950" transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }} />
+                    )}
+                    <span className="relative z-10 flex items-center gap-1"><Tag className="h-3 w-3" /> {category}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <label className="relative w-full sm:w-64">
+              <span className="sr-only">Search articles</span>
+              <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-charcoal-muted" />
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search articles…"
+                className="w-full rounded-full border border-hairline bg-white py-2.5 pl-10 pr-4 text-sm text-charcoal placeholder:text-charcoal-muted focus:outline-none focus:ring-2 focus:ring-sea-400 focus:border-sea-400 transition-all"
+              />
+            </label>
+          </motion.div>
+
+          <AnimatePresence mode="wait">
+            <motion.div key={`${activeCategory}-${query}`} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} transition={{ duration: 0.25 }}>
+              {filteredPosts.length === 0 ? (
+                <EmptyState icon="SearchX" title="No articles found" description="Try a different search term or category." />
+              ) : (
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {filteredPosts.map((post, index) => (
+                    <BlogCard key={post.slug} post={post} index={index} />
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="bg-sea-950 py-20 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-cyan-600/8 blur-[120px]" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
+        </div>
+        <div className="container-xl relative z-10">
+          <div className="mx-auto max-w-xl text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Newsletter</span>
+              <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">Occasional notes on shipping digital products well.</h2>
+              <p className="mt-3 text-sm text-graphite-400">No spam. Just practical insights delivered to your inbox.</p>
+              <div className="mt-8">
+                <NewsletterForm />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

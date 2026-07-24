@@ -65,15 +65,40 @@ function loadGoogleTranslate() {
 }
 
 function hideGoogleTranslateBanner() {
-  document.body.style.top = '0';
-  document.documentElement.style.marginTop = '0';
+  const body = document.body;
+  const html = document.documentElement;
 
-  document.querySelectorAll('.goog-te-banner-frame, iframe.skiptranslate').forEach((element) => {
-    element.style.display = 'none';
-    element.style.visibility = 'hidden';
-    element.style.height = '0';
+  // Reset only the top/margin offset that GT injects — do NOT touch position
+  // (GT needs position:relative on body to render translations correctly).
+  if (body.style.top && body.style.top !== '0px') body.style.top = '0px';
+  if (body.style.marginTop && body.style.marginTop !== '0px') body.style.marginTop = '0px';
+  if (html.style.marginTop && html.style.marginTop !== '0px') html.style.marginTop = '0px';
+
+  // Hide the visible GT toolbar banner & iframe overlay
+  document.querySelectorAll(
+    '.goog-te-banner-frame, iframe.skiptranslate, .goog-te-balloon-frame, #goog-gt-tt'
+  ).forEach((el) => {
+    if (el.style.display !== 'none') {
+      el.style.display = 'none';
+      el.style.visibility = 'hidden';
+      el.style.height = '0';
+    }
   });
+
+  // Keep .goog-te-gadget off-screen so <select> stays accessible
+  const gadget = document.querySelector('.goog-te-gadget');
+  if (gadget && gadget.style.left !== '-9999px') {
+    gadget.style.position = 'absolute';
+    gadget.style.left = '-9999px';
+    gadget.style.top = '0';
+    gadget.style.opacity = '0';
+    gadget.style.pointerEvents = 'none';
+    gadget.style.height = '0';
+    gadget.style.overflow = 'hidden';
+  }
 }
+
+
 
 export default function LanguageSwitcher({ className, showWidgetHost = false, size = 'compact' }) {
   const selectId = useId();
@@ -93,7 +118,9 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
     setSelectedLanguage(languages.some((language) => language.code === initialLanguage) ? initialLanguage : 'en');
     loadGoogleTranslate();
 
-    const cleanupTimer = window.setInterval(hideGoogleTranslateBanner, 500);
+    // Poll at 100ms — fast enough to catch GT's body.style.top injection
+    // before the user starts scrolling and sees a white gap.
+    const cleanupTimer = window.setInterval(hideGoogleTranslateBanner, 100);
     return () => window.clearInterval(cleanupTimer);
   }, []);
 
@@ -123,7 +150,35 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
     setSelectedLanguage(nextLanguage);
     localStorage.setItem(STORAGE_KEY, nextLanguage);
     setTranslateCookie(nextLanguage);
-    window.location.reload();
+
+    // Trigger Google Translate programmatically via its hidden <select>
+    // This avoids a full-page reload and the white/blank screen flash.
+    const tryTrigger = () => {
+      const frame = document.querySelector('iframe.skiptranslate');
+      const select =
+        document.querySelector('.goog-te-combo') ||
+        frame?.contentDocument?.querySelector('.goog-te-combo');
+
+      if (select) {
+        select.value = nextLanguage;
+        select.dispatchEvent(new Event('change'));
+        return true;
+      }
+      return false;
+    };
+
+    // Give the widget a moment to initialise on first use, then fall back to reload
+    if (!tryTrigger()) {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (tryTrigger() || attempts > 20) {
+          clearInterval(interval);
+          // Only reload if the widget never responded (rare edge-case)
+          if (attempts > 20) window.location.reload();
+        }
+      }, 150);
+    }
   }
 
   return (

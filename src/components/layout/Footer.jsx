@@ -63,6 +63,21 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+          {siteConfig.nav.footer.products && (
+            <>
+              <h3 className="mb-4 mt-6 text-sm font-semibold text-white">SaaS Products</h3>
+              <ul className="space-y-2.5 text-sm">
+                {siteConfig.nav.footer.products.map((item) => (
+                  <li key={item.label}>
+                    <Link to={item.to} className="focus-ring rounded transition-colors hover:text-white flex items-center gap-1.5">
+                      <span>{item.label}</span>
+                      <span className="rounded bg-cyan-500/20 px-1.5 py-0.2 text-[9px] text-cyan-300 font-semibold">SaaS</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
           <h3 className="mb-4 mt-6 text-sm font-semibold text-white">Legal</h3>
           <ul className="space-y-2.5 text-sm">
             {siteConfig.nav.footer.legal.map((item) => (

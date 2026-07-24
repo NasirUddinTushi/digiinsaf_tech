@@ -11,6 +11,7 @@ import About from '@/pages/About';
 import Services from '@/pages/Services';
 import ServiceDetail from '@/pages/ServiceDetail';
 import Solutions from '@/pages/Solutions';
+import Products from '@/pages/Products';
 import Work from '@/pages/Work';
 import CaseStudy from '@/pages/CaseStudy';
 import Process from '@/pages/Process';
@@ -58,6 +59,14 @@ function AnimatedRoutes() {
             element={
               <PageTransition>
                 <ServiceDetail />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <PageTransition>
+                <Products />
               </PageTransition>
             }
           />
