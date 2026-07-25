@@ -10,6 +10,23 @@ export const projectCategories = [
 
 export const projects = [
   {
+    slug: 'picpixels',
+    title: 'PicPixels',
+    industry: 'Photo Editing & E-commerce Imaging Services',
+    country: 'Bangladesh',
+    categories: ['web', 'ecommerce'],
+    liveUrl: 'https://picpixels.com/',
+    techStack: ['React 19', 'Python', 'Django', 'PostgreSQL', 'Tailwind CSS'],
+    summary:
+      'A service and portfolio site for a professional product-photo editing studio, presenting retouching work across shoes, watches, jewelry and home décor for e-commerce brands.',
+    challenge:
+      'E-commerce sellers need consistent, high-quality product photography at scale, but coordinating edits and reviewing work with an outsourced studio over email or chat is slow and hard to track.',
+    strategy:
+      'Structured the site around a transparent, step-by-step editing workflow and a categorized portfolio, with a low-friction free-trial request so new clients could evaluate quality before committing.',
+    solution:
+      'A React front end presenting the studio\'s services, portfolio and workflow, with a free-trial request flow to convert visitors into paying clients.',
+  },
+  {
     slug: 'fly-gcc-international',
     title: 'Fly GCC International',
     industry: 'Travel & Visa Services',

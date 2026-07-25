@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, CheckCircle2, Zap, Code2, Globe, Smartphone, BrainCircuit, Sparkles } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Code2, Globe, Smartphone, BrainCircuit } from 'lucide-react';
 import SEO from '@/components/common/SEO';
+import PageHero from '@/components/common/PageHero';
 import FAQAccordion from '@/components/common/FAQAccordion';
 import CTASection from '@/components/common/CTASection';
 import ProjectCard from '@/components/cards/ProjectCard';
@@ -12,15 +13,10 @@ import { capabilityGroups } from '@/data/capabilityGroups';
 import { getServiceBySlug } from '@/data/services';
 import { faqs } from '@/data/faqs';
 import { getProjectBySlug } from '@/data/projects';
+import { fadeUpViewport, fadeUpViewportStagger } from '@/utils/motionVariants';
 
 const relatedWorkSlugs = ['happy-home-tex', 'fawz-cleaning-and-gardening'];
-
-const groupConfig = [
-  { icon: Code2, color: 'from-blue-500 to-cyan-500', bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-  { icon: Globe, color: 'from-violet-500 to-purple-500', bg: 'bg-violet-50', text: 'text-violet-700', border: 'border-violet-200' },
-  { icon: Smartphone, color: 'from-emerald-500 to-teal-500', bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
-  { icon: BrainCircuit, color: 'from-amber-500 to-orange-500', bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
-];
+const groupIcons = [Code2, Globe, Smartphone, BrainCircuit];
 
 export default function Services() {
   const relatedWork = relatedWorkSlugs.map(getProjectBySlug);
@@ -32,60 +28,37 @@ export default function Services() {
         description="UI/UX design, web and software development, mobile app development, and AI and business automation from DigiInsaf."
       />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-sea-950 pt-[clamp(64px,10vw,120px)] pb-16">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-cyan-600/10 blur-[140px] animate-mesh-drift" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-blue-700/8 blur-[120px] animate-mesh-drift" style={{ animationDelay: '-5s' }} />
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '55px 55px' }} />
-        </div>
-        <div className="container-xl relative z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300 mb-5">
-              <Sparkles className="h-3.5 w-3.5" /> Services
-            </div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
-              Services covering the full{' '}
-              <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                digital product lifecycle.
-              </span>
-            </h1>
-            <p className="mt-5 text-base text-graphite-300 sm:text-lg leading-relaxed max-w-2xl">
-              Every engagement starts from the business outcome, not a fixed package. Below are the four capabilities we work in, and where they apply.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        tone="navy"
+        eyebrow="Services"
+        title="Services covering the full digital product lifecycle."
+        description="Every engagement starts from the business outcome, not a fixed package. Below are the four capabilities we work in, and where they apply."
+      />
 
       {/* Capability Groups */}
-      <section className="bg-[#f8f7f3] py-16">
+      <section className="bg-paper py-16">
         <div className="container-xl space-y-8">
           {capabilityGroups.map((group, index) => {
             const groupServices = group.services.map(getServiceBySlug).filter(Boolean);
             const signs = groupServices.map((service) => service.problems[0]).slice(0, 4);
-            const cfg = groupConfig[index % groupConfig.length];
-            const IconComp = cfg.icon;
+            const IconComp = groupIcons[index % groupIcons.length];
 
             return (
               <motion.div
                 key={group.category}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative overflow-hidden rounded-2xl border border-hairline bg-white shadow-elevation-sm hover:shadow-elevation-md transition-all duration-300"
+                {...fadeUpViewportStagger(index)}
+                className="overflow-hidden rounded-2xl border border-hairline bg-white shadow-elevation-sm hover:shadow-elevation-md transition-shadow duration-300"
               >
-                {/* Colored top accent */}
-                <div className={`h-1 bg-gradient-to-r ${cfg.color} w-full`} />
+                <div className="h-1 w-full bg-sea-700" />
 
                 <div className="grid gap-8 p-8 lg:grid-cols-12">
                   {/* Left: Group info */}
                   <div className="lg:col-span-4">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${cfg.bg} ${cfg.text}`}>
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sea-50 text-sea-700">
                         <IconComp className="h-5 w-5" />
                       </div>
-                      <span className={`rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wider ${cfg.bg} ${cfg.text} ${cfg.border}`}>
+                      <span className="rounded-full border border-sea-200 bg-sea-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-sea-700">
                         {group.category}
                       </span>
                     </div>
@@ -99,7 +72,7 @@ export default function Services() {
                     <ul className="space-y-2.5">
                       {signs.map((problem) => (
                         <li key={problem} className="flex items-start gap-2.5 text-sm text-charcoal-muted">
-                          <CheckCircle2 className={`mt-0.5 h-4 w-4 shrink-0 ${cfg.text}`} />
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sea-700" />
                           {problem}
                         </li>
                       ))}
@@ -112,15 +85,13 @@ export default function Services() {
                     <ul className="grid gap-2">
                       {groupServices.map((service) => (
                         <li key={service.slug}>
-                          <motion.div whileHover={{ x: 4, transition: { duration: 0.15 } }}>
-                            <Link
-                              to={`/services/${service.slug}`}
-                              className={`group flex items-center justify-between gap-3 rounded-xl border px-4 py-3 transition-all hover:shadow-elevation-sm ${cfg.bg} ${cfg.border} hover:border-opacity-100`}
-                            >
-                              <span className={`text-sm font-semibold ${cfg.text}`}>{service.name}</span>
-                              <ArrowUpRight className={`h-4 w-4 shrink-0 ${cfg.text} transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5`} />
-                            </Link>
-                          </motion.div>
+                          <Link
+                            to={`/services/${service.slug}`}
+                            className="group flex items-center justify-between gap-3 rounded-xl border border-sea-200 bg-sea-50 px-4 py-3 transition-colors hover:bg-sea-100"
+                          >
+                            <span className="text-sm font-semibold text-sea-700">{service.name}</span>
+                            <ArrowUpRight className="h-4 w-4 shrink-0 text-sea-700 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -137,9 +108,9 @@ export default function Services() {
       <ProcessSection />
 
       {/* Related Work */}
-      <section className="bg-[#f8f7f3] py-16">
+      <section className="bg-paper py-16">
         <div className="container-xl">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
+          <motion.div {...fadeUpViewport} className="mb-10">
             <span className="text-xs font-bold uppercase tracking-wider text-sea-700">Selected Related Work</span>
             <h2 className="mt-2 text-3xl font-extrabold text-charcoal sm:text-4xl">Services applied to real projects.</h2>
           </motion.div>
@@ -154,7 +125,7 @@ export default function Services() {
       {/* FAQ */}
       <section className="bg-white py-16 border-b border-hairline">
         <div className="container-xl mx-auto max-w-3xl">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+          <motion.div {...fadeUpViewport} className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-sea-700">FAQ</span>
             <h2 className="mt-2 text-3xl font-extrabold text-charcoal sm:text-4xl">Common questions about our services.</h2>
           </motion.div>

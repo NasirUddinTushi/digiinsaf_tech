@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, BookOpen, ArrowUpRight, Clock, Tag } from 'lucide-react';
 import SEO from '@/components/common/SEO';
+import PageHero from '@/components/common/PageHero';
 import BlogCard from '@/components/cards/BlogCard';
 import EmptyState from '@/components/common/EmptyState';
 import NewsletterForm from '@/components/forms/NewsletterForm';
 import { blogs, blogCategories } from '@/data/blogs';
+import { fadeUpViewport } from '@/utils/motionVariants';
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -26,35 +28,17 @@ export default function Blog() {
     <>
       <SEO title="Insights" description="Practical thinking on digital product strategy, engineering and design from the DigiInsaf team." />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-sea-950 pt-[clamp(64px,10vw,120px)] pb-16">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/3 w-[600px] h-[600px] rounded-full bg-cyan-600/10 blur-[140px] animate-mesh-drift" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-700/8 blur-[120px]" />
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '55px 55px' }} />
-        </div>
-        <div className="container-xl relative z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300 mb-5">
-              <BookOpen className="h-3.5 w-3.5" /> Insights & Articles
-            </div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
-              Notes on building{' '}
-              <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                digital products well.
-              </span>
-            </h1>
-            <p className="mt-5 text-base text-graphite-300 sm:text-lg leading-relaxed">
-              Practical notes on planning, designing and building digital products well.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        tone="navy"
+        eyebrow="Insights & Articles"
+        title="Notes on building digital products well."
+        description="Practical notes on planning, designing and building digital products well."
+      />
 
       {/* Featured Post */}
-      <section className="bg-[#f8f7f3] pt-14 pb-8">
+      <section className="bg-paper pt-14 pb-8">
         <div className="container-xl">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <motion.div {...fadeUpViewport}>
             <span className="text-xs font-bold uppercase tracking-wider text-sea-700 mb-4 block">Featured Article</span>
             <Link
               to={`/insights/${featuredPost.slug}`}
@@ -94,7 +78,7 @@ export default function Blog() {
       </section>
 
       {/* Articles Grid */}
-      <section className="bg-[#f8f7f3] py-10">
+      <section className="bg-paper py-10">
         <div className="container-xl">
           {/* Filter + Search */}
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
@@ -150,14 +134,10 @@ export default function Blog() {
       </section>
 
       {/* Newsletter */}
-      <section className="bg-sea-950 py-20 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-cyan-600/8 blur-[120px]" />
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
-        </div>
-        <div className="container-xl relative z-10">
+      <section className="bg-sea-950 py-20">
+        <div className="container-xl">
           <div className="mx-auto max-w-xl text-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.div {...fadeUpViewport}>
               <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Newsletter</span>
               <h2 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">Occasional notes on shipping digital products well.</h2>
               <p className="mt-3 text-sm text-graphite-400">No spam. Just practical insights delivered to your inbox.</p>

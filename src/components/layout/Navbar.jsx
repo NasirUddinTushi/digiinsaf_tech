@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Menu, Sparkles, ExternalLink } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, ExternalLink } from 'lucide-react';
 import siteConfig from '@/config/siteConfig';
 import { getFeaturedServices } from '@/data/services';
 import { products } from '@/data/products';
@@ -43,16 +43,22 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          'sticky top-0 z-50 border-b transition-colors duration-300',
-          solid ? 'border-hairline bg-paper/95 backdrop-blur-md' : 'border-transparent bg-sea-950'
+          'sticky top-0 z-50 border-b transition-all duration-300',
+          solid ? 'border-hairline bg-paper/95 shadow-elevation-sm backdrop-blur-md' : 'border-transparent bg-sea-950'
         )}
       >
-        <nav className="container-xl flex h-18 items-center justify-between gap-5 py-4" aria-label="Primary">
+        <nav className="container-xl flex min-h-18 items-center justify-between gap-5 py-3" aria-label="Primary">
           <Link to="/" className="focus-ring flex min-w-[150px] items-center rounded" aria-label="Digiinsaf home">
             <BrandName onDark={!solid} />
           </Link>
 
-          <div className="hidden items-center gap-0.5 xl:gap-1 lg:flex" ref={dropdownRef}>
+          <div
+            className={cn(
+              'hidden items-center gap-0.5 rounded-full p-1 xl:gap-1 lg:flex',
+              solid ? 'border border-hairline bg-white/60' : 'border border-white/10 bg-white/[0.04]'
+            )}
+            ref={dropdownRef}
+          >
             {siteConfig.nav.primary.map((item) => {
               const dropdownType = item.to === '/services' ? 'services' : item.to === '/products' ? 'products' : null;
               const isDropdownOpen = openDropdown === dropdownType;
@@ -66,8 +72,8 @@ export default function Navbar() {
                     aria-haspopup="true"
                     className={cn(
                       'focus-ring flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition-colors xl:px-4',
-                      solid ? 'text-charcoal-muted hover:text-charcoal' : 'text-white/80 hover:text-white',
-                      location.pathname.startsWith(item.to) && (solid ? 'text-charcoal' : 'text-white')
+                      solid ? 'text-charcoal-muted hover:bg-white hover:text-charcoal' : 'text-white/80 hover:bg-white/10 hover:text-white',
+                      location.pathname.startsWith(item.to) && (solid ? 'bg-white text-charcoal shadow-elevation-sm' : 'bg-white/10 text-white')
                     )}
                   >
                     {item.label}
@@ -81,7 +87,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.18 }}
-                        className="absolute left-1/2 top-full mt-2 grid w-[min(720px,94vw)] -translate-x-1/2 grid-cols-1 gap-4 rounded-xl2 border border-white/10 bg-sea-950/95 p-5 shadow-elevation-lg backdrop-blur-2xl sm:grid-cols-2"
+                        className="absolute left-1/2 top-full mt-2 grid w-[min(720px,94vw)] -translate-x-1/2 grid-cols-1 gap-4 rounded-xl2 border border-white/10 bg-sea-950 p-5 shadow-elevation-lg sm:grid-cols-2"
                       >
                         <div className="col-span-2 border-b border-white/10 pb-3 flex items-center justify-between text-xs font-semibold text-cyan-400 uppercase tracking-wider">
                           <span>Full-Service Digital Product Development</span>
@@ -129,16 +135,10 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.18 }}
-                        className="absolute left-1/2 top-full mt-2 grid w-[min(640px,94vw)] -translate-x-1/2 grid-cols-1 gap-4 rounded-xl2 border border-white/10 bg-sea-950/95 p-5 shadow-elevation-lg backdrop-blur-2xl"
+                        className="absolute left-1/2 top-full mt-2 grid w-[min(640px,94vw)] -translate-x-1/2 grid-cols-1 gap-4 rounded-xl2 border border-white/10 bg-sea-950 p-5 shadow-elevation-lg"
                       >
-                        <div className="border-b border-white/10 pb-3 flex items-center justify-between text-xs font-semibold text-cyan-400 uppercase tracking-wider">
-                          <span className="flex items-center gap-1.5">
-                            <Sparkles className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
-                            In-House SaaS Products & Active Deployments
-                          </span>
-                          <span className="rounded-full bg-cyan-500/20 px-2 py-0.5 text-[10px] font-semibold text-cyan-300">
-                            Deployments Ready
-                          </span>
+                        <div className="border-b border-white/10 pb-3 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
+                          In-House SaaS Products
                         </div>
 
                         <div className="space-y-3">
@@ -200,49 +200,27 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     cn(
                       'focus-ring relative rounded-full px-3 py-2 text-sm font-medium transition-colors xl:px-4',
-                      solid ? 'text-charcoal-muted hover:text-charcoal' : 'text-white/80 hover:text-white',
-                      isActive && (solid ? 'text-charcoal' : 'text-white')
+                      solid ? 'text-charcoal-muted hover:bg-white hover:text-charcoal' : 'text-white/80 hover:bg-white/10 hover:text-white',
+                      isActive && (solid ? 'bg-white text-charcoal shadow-elevation-sm' : 'bg-white/10 text-white')
                     )
                   }
                 >
-                  {({ isActive }) => (
-                    <>
-                      {item.label}
-                      {isActive && (
-                        <motion.span
-                          layoutId="nav-active"
-                          className={cn('absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full', solid ? 'bg-sea-700' : 'bg-white')}
-                        />
-                      )}
-                    </>
-                  )}
+                  {item.label}
                 </NavLink>
               );
             })}
           </div>
 
           <div className="hidden items-center gap-2 xl:gap-3 lg:flex">
-            <LanguageSwitcher showWidgetHost />
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            >
-              <Button
-                to="/contact"
-                variant="primary"
-                size="md"
-                className="shadow-neon-cyan hover:shadow-[0_0_40px_-5px_rgba(46,125,186,0.7)] transition-shadow"
-              >
-                {siteConfig.cta.primary}
-              </Button>
-            </motion.div>
+            <LanguageSwitcher showWidgetHost solid={solid} />
+            <Button to="/contact" variant="primary" size="md">
+              {siteConfig.cta.primary}
+              <ArrowRight className="h-4 w-4" />
+            </Button>
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
-            <LanguageSwitcher size="mobile" />
+            <LanguageSwitcher size="mobile" solid={solid} />
             <motion.button
               type="button"
               onClick={() => setMobileOpen(true)}

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Target, Rocket, MessageCircle, Zap } from 'lucide-react';
 import SectionHeading from '@/components/common/SectionHeading';
 import Section from '@/components/common/Section';
 
@@ -8,28 +9,28 @@ const points = [
     title: 'Business-first engineering',
     description:
       'Every engagement starts from the business goal, not a technology preference — we recommend the simplest architecture that meets requirement.',
-    icon: '🎯',
+    icon: Target,
   },
   {
     number: '02',
     title: 'One team from idea to launch',
     description:
       'Strategy, UI/UX design, and development sit under one roof, so early project decisions stay intact through to shipping.',
-    icon: '🚀',
+    icon: Rocket,
   },
   {
     number: '03',
     title: 'Transparent & direct communication',
     description:
       'Structured updates, bi-weekly demos, and honest timelines are part of how we work — you always know where your project stands.',
-    icon: '💬',
+    icon: MessageCircle,
   },
   {
     number: '04',
     title: 'Scalable, maintainable code',
     description:
       'Architecture decisions are made to hold up as user traffic and feature scope grow, without requiring early rewrites.',
-    icon: '⚡',
+    icon: Zap,
   },
 ];
 
@@ -69,7 +70,9 @@ export default function WhyDigiInsaf() {
 
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-2xl">{point.icon}</span>
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-sea-50 text-sea-700">
+                  <point.icon className="h-5 w-5" />
+                </span>
                 <span className="text-3xl font-black text-sea-100 group-hover:text-sea-200 transition-colors select-none">
                   {point.number}
                 </span>

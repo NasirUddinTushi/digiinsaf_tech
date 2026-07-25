@@ -45,3 +45,7 @@ export const scaleIn = {
   exit: { opacity: 0, scale: 0.96 },
   transition: { duration: 0.3, ease: 'easeOut' },
 };
+
+// Standard card hover reaction — one lift height used everywhere instead of
+// each component picking its own -6/-8/etc value.
+export const hoverLift = { y: -4 };

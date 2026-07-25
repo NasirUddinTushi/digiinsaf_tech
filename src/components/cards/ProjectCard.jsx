@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ExternalLink, Sparkles, TrendingUp } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, MapPin, Sparkles, TrendingUp } from 'lucide-react';
 import { fadeUpViewportStagger } from '@/utils/motionVariants';
 import { cn } from '@/utils/cn';
 
@@ -33,11 +33,8 @@ export default function ProjectCard({ project, index = 0, variant = 'compact' })
           <span className="font-mono text-[10px] text-graphite-500 truncate max-w-[200px]">
             {project.liveUrl ? project.liveUrl.replace('https://', '') : project.slug}
           </span>
-          <span className="flex items-center gap-1 text-[10px] font-semibold text-emerald-500">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-            </span>
+          <span className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-600">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
             Live
           </span>
         </div>
@@ -75,7 +72,9 @@ export default function ProjectCard({ project, index = 0, variant = 'compact' })
             {project.industry}
           </span>
           {project.country && (
-            <span className="text-xs text-charcoal-muted font-medium">📍 {project.country}</span>
+            <span className="flex items-center gap-1 text-xs text-charcoal-muted font-medium">
+              <MapPin className="h-3 w-3" /> {project.country}
+            </span>
           )}
         </div>
 

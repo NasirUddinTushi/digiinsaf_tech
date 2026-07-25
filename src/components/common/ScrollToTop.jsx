@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
+// Two jobs in one place: reset scroll to the top (the hero) on every route
+// change — React Router doesn't do this on its own, so without it a page
+// navigated to while scrolled down stays scrolled down — and show a manual
+// "back to top" button once the visitor has scrolled past the hero.
 export default function ScrollToTop() {
+  const { pathname } = useLocation();
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400);
@@ -25,14 +35,8 @@ export default function ScrollToTop() {
           whileTap={{ scale: 0.9 }}
           onClick={scrollUp}
           aria-label="Scroll to top"
-          className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-sea-950 text-white shadow-[0_0_30px_-4px_rgba(46,125,186,0.6)] border border-white/10 backdrop-blur-md hover:bg-sea-800 transition-colors"
+          className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-sea-950 text-white border border-white/10 hover:bg-sea-800 transition-colors"
         >
-          {/* Animated pulsing ring */}
-          <motion.span
-            className="absolute inset-0 rounded-full border-2 border-cyan-400/40"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
           <ArrowUp className="h-5 w-5" />
         </motion.button>
       )}

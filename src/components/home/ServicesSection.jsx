@@ -6,14 +6,8 @@ import Section from '@/components/common/Section';
 import { capabilityGroups } from '@/data/capabilityGroups';
 
 const categoryIcons = [Code2, Globe, Smartphone, BrainCircuit, Zap, Sparkles];
-const categoryColors = [
-  { bg: 'bg-blue-50', icon: 'text-blue-600', border: 'border-blue-200', accent: 'bg-blue-600' },
-  { bg: 'bg-violet-50', icon: 'text-violet-600', border: 'border-violet-200', accent: 'bg-violet-600' },
-  { bg: 'bg-emerald-50', icon: 'text-emerald-600', border: 'border-emerald-200', accent: 'bg-emerald-600' },
-  { bg: 'bg-amber-50', icon: 'text-amber-600', border: 'border-amber-200', accent: 'bg-amber-600' },
-  { bg: 'bg-rose-50', icon: 'text-rose-600', border: 'border-rose-200', accent: 'bg-rose-600' },
-  { bg: 'bg-cyan-50', icon: 'text-cyan-600', border: 'border-cyan-200', accent: 'bg-cyan-600' },
-];
+// Single consistent accent — categories differentiate by icon/copy, not hue.
+const categoryColor = { bg: 'bg-sea-50', icon: 'text-sea-700', border: 'border-sea-200', accent: 'bg-sea-700' };
 
 export default function ServicesSection() {
   const [expandedIndex, setExpandedIndex] = useState(0);
@@ -73,7 +67,7 @@ export default function ServicesSection() {
         <div className="space-y-3 lg:col-span-7">
           {capabilityGroups.map((group, idx) => {
             const isExpanded = expandedIndex === idx;
-            const color = categoryColors[idx % categoryColors.length];
+            const color = categoryColor;
             const IconComp = categoryIcons[idx % categoryIcons.length];
 
             return (
@@ -89,8 +83,12 @@ export default function ServicesSection() {
                     : 'border-hairline bg-white/70 hover:bg-white hover:border-sea-200 hover:shadow-elevation-md'
                 }`}
               >
-                {/* Gradient accent top edge on hover */}
-                <div className={`absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl transition-all duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-60'}`} style={{ background: `linear-gradient(90deg, transparent, ${color.icon.includes('blue') ? '#3b82f6' : color.icon.includes('violet') ? '#8b5cf6' : color.icon.includes('emerald') ? '#10b981' : color.icon.includes('amber') ? '#f59e0b' : color.icon.includes('rose') ? '#f43f5e' : '#06b6d4'}, transparent)` }} />
+                {/* Accent top edge on hover/expand */}
+                <div
+                  className={`absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-transparent via-sea-600 to-transparent transition-opacity duration-300 ${
+                    isExpanded ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-60'
+                  }`}
+                />
                 {/* Clickable Header */}
                 <button
                   type="button"

@@ -34,10 +34,15 @@ const Button = forwardRef(function Button(
 ) {
   const classes = cn(baseStyles, variantStyles[variant], sizeStyles[size], className);
   const Component = motion.button;
+  const motionProps = {
+    whileHover: { y: -2, scale: 1.025 },
+    whileTap: { scale: 0.96 },
+    transition: { type: 'spring', stiffness: 400, damping: 22 },
+  };
 
   if (to) {
     return (
-      <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} className="inline-block">
+      <motion.div {...motionProps} className="inline-block">
         <Link to={to} className={classes} ref={ref} {...rest}>
           {children}
         </Link>
@@ -47,7 +52,7 @@ const Button = forwardRef(function Button(
 
   if (href) {
     return (
-      <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} className="inline-block">
+      <motion.div {...motionProps} className="inline-block">
         <a href={href} className={classes} ref={ref} {...rest}>
           {children}
         </a>
@@ -56,7 +61,7 @@ const Button = forwardRef(function Button(
   }
 
   return (
-    <Component whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} className={classes} ref={ref} {...rest}>
+    <Component {...motionProps} className={classes} ref={ref} {...rest}>
       {children}
     </Component>
   );

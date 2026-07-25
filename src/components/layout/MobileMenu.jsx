@@ -79,7 +79,7 @@ export default function MobileMenu({ isOpen, onClose }) {
             </nav>
 
             <div className="mt-8 flex flex-col gap-3">
-              <LanguageSwitcher size="full" />
+              <LanguageSwitcher size="full" solid />
               <Button to="/contact" onClick={onClose} variant="primary" size="lg" className="w-full">
                 {siteConfig.cta.primary}
               </Button>

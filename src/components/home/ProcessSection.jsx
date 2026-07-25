@@ -11,8 +11,6 @@ const steps = [
     time: 'Week 1',
     description: 'Understand business goals, map user journeys, define cloud architecture, and outline fixed scope.',
     deliverables: ['Tech Specification', 'Architecture Diagram', 'Fixed Scope Roadmap'],
-    color: 'from-blue-500 to-cyan-500',
-    bg: 'bg-blue-50',
   },
   {
     step: '02',
@@ -20,8 +18,6 @@ const steps = [
     time: 'Week 2',
     description: 'Create interactive Figma wireframes and design systems to validate usability before writing code.',
     deliverables: ['Design System', 'Clickable Figma Prototype', 'Design Handoff'],
-    color: 'from-violet-500 to-purple-500',
-    bg: 'bg-violet-50',
   },
   {
     step: '03',
@@ -29,8 +25,6 @@ const steps = [
     time: 'Weeks 3–5',
     description: 'Full-stack React/Node/Python development in bi-weekly sprints with continuous staging deployments.',
     deliverables: ['Production Code', 'Bi-weekly Demos', 'Automated QA'],
-    color: 'from-emerald-500 to-teal-500',
-    bg: 'bg-emerald-50',
   },
   {
     step: '04',
@@ -38,8 +32,6 @@ const steps = [
     time: 'Week 6+',
     description: 'Deploy on cloud infrastructure (AWS/Vercel/Docker), monitor analytics, and provide ongoing support.',
     deliverables: ['Cloud Deployment', 'SLA Support', 'Analytics Setup'],
-    color: 'from-amber-500 to-orange-500',
-    bg: 'bg-amber-50',
   },
 ];
 
@@ -69,20 +61,20 @@ export default function ProcessSection() {
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
               className="group relative bg-white rounded-2xl border border-hairline shadow-elevation-sm hover:shadow-elevation-md hover:border-sea-200 transition-all duration-300 overflow-hidden"
             >
-              {/* Top gradient bar */}
-              <div className={`h-1.5 bg-gradient-to-r ${item.color} w-full`} />
+              {/* Top accent bar */}
+              <div className="h-1.5 w-full bg-sea-700" />
 
               <div className="p-6">
                 {/* Step number bubble */}
                 <div className="flex items-center justify-between mb-5">
                   <motion.div
-                    className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} shadow-sm`}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-sea-800"
                     whileHover={{ rotate: 5, scale: 1.1 }}
                     transition={{ duration: 0.2 }}
                   >
                     <span className="text-xs font-black text-white">{item.step}</span>
                   </motion.div>
-                  <span className={`rounded-full ${item.bg} border border-hairline px-2.5 py-1 text-[10px] font-bold text-charcoal-muted`}>
+                  <span className="rounded-full bg-sea-50 border border-hairline px-2.5 py-1 text-[10px] font-bold text-charcoal-muted">
                     {item.time}
                   </span>
                 </div>

@@ -64,6 +64,34 @@ function loadGoogleTranslate() {
   document.body.appendChild(script);
 }
 
+// Drives the actual translation. Google's widget only translates the page
+// when its own hidden <select class="goog-te-combo"> receives a real
+// `change` event — setting the googtrans cookie alone (the previous
+// implementation) just persists the choice for the *next* full reload, it
+// doesn't trigger a translation on the current page, which is why picking a
+// language looked like it did nothing until you happened to reload.
+function dispatchGoogleTranslateChange(languageCode) {
+  const combo = document.querySelector('select.goog-te-combo');
+  if (!combo) return false;
+
+  combo.value = languageCode;
+  combo.dispatchEvent(new Event('change'));
+  return true;
+}
+
+// The widget needs a moment after script injection before `.goog-te-combo`
+// exists in the DOM — poll briefly instead of assuming it's ready, and only
+// fall back to a full reload (which re-applies the language from the
+// googtrans cookie on next load) if it never shows up.
+function applyGoogleTranslate(languageCode, onExhausted, attemptsLeft = 20) {
+  if (dispatchGoogleTranslateChange(languageCode)) return;
+  if (attemptsLeft <= 0) {
+    onExhausted();
+    return;
+  }
+  window.setTimeout(() => applyGoogleTranslate(languageCode, onExhausted, attemptsLeft - 1), 150);
+}
+
 function hideGoogleTranslateBanner() {
   const body = document.body;
   const html = document.documentElement;
@@ -100,7 +128,7 @@ function hideGoogleTranslateBanner() {
 
 
 
-export default function LanguageSwitcher({ className, showWidgetHost = false, size = 'compact' }) {
+export default function LanguageSwitcher({ className, showWidgetHost = false, size = 'compact', solid = false }) {
   const selectId = useId();
   const switcherRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -150,22 +178,24 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
     setSelectedLanguage(nextLanguage);
     localStorage.setItem(STORAGE_KEY, nextLanguage);
     setTranslateCookie(nextLanguage);
-    window.location.reload();
+    applyGoogleTranslate(nextLanguage, () => window.location.reload());
   }
 
   return (
     <div
       ref={switcherRef}
       className={cn(
-        'language-switcher notranslate relative text-white',
+        'language-switcher notranslate relative',
+        solid ? 'text-charcoal' : 'text-white',
         isFull && 'w-full',
         className
       )}
       translate="no"
     >
-      {/* Always a self-contained dark navy chip — deliberately theme-independent
-          so it reads correctly whether the navbar behind it is transparent
-          (over the home hero) or solid light (scrolled / other pages). */}
+      {/* `solid` mirrors the Navbar's own light/dark state so the chip reads
+          as part of the bar instead of a dark block floating on a light
+          header — dropdown panel stays dark regardless (an overlay, not
+          part of the bar). */}
       <button
         type="button"
         id={selectId}
@@ -174,7 +204,10 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
         aria-expanded={open}
         aria-label={`Translate website. Current language: ${selected.label}`}
         className={cn(
-          'focus-ring group relative flex items-center overflow-hidden rounded-full border border-white/15 bg-sea-950 text-sm font-semibold text-white transition-colors duration-200 hover:bg-sea-800',
+          'focus-ring group relative flex items-center overflow-hidden rounded-full border text-sm font-semibold transition-colors duration-200',
+          solid
+            ? 'border-hairline bg-white text-charcoal-muted hover:bg-sea-50 hover:text-charcoal'
+            : 'border-white/15 bg-white/10 text-white hover:bg-white/20',
           isMobile ? 'h-10 w-[82px] gap-1.5 px-2.5' : 'gap-2 px-3.5 py-2.5',
           isFull && 'h-12 w-full justify-between rounded-xl px-4'
         )}
@@ -182,7 +215,8 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
         <span className="relative flex items-center gap-2">
           <span
             className={cn(
-              'flex items-center justify-center rounded-full bg-white/10 text-sea-400',
+              'flex items-center justify-center rounded-full',
+              solid ? 'bg-sea-50 text-sea-700' : 'bg-white/10 text-sea-300',
               isMobile ? 'h-6 w-6' : 'h-7 w-7'
             )}
           >
@@ -193,7 +227,11 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
           </span>
         </span>
         <ChevronDown
-          className={cn('relative h-4 w-4 text-white/60 transition-transform', open && 'rotate-180')}
+          className={cn(
+            'relative h-4 w-4 transition-transform',
+            solid ? 'text-charcoal-muted' : 'text-white/60',
+            open && 'rotate-180'
+          )}
           aria-hidden="true"
         />
       </button>

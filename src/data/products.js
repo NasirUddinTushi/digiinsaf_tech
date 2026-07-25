@@ -1,5 +1,6 @@
-// Central product catalogue for Digiinsaf in-house SaaS solutions & deployments.
-// Update or extend this file when new SaaS products are deployed.
+// Central product catalogue for Digiinsaf in-house SaaS solutions in
+// development. Update status/liveUrl once a product actually ships —
+// don't mark something "Live" or link a URL until it's real and reachable.
 
 export const products = [
   {
@@ -7,16 +8,14 @@ export const products = [
     name: 'DigiFlow SaaS Platform',
     tagline: 'AI-Powered Business Automation & Workflow Engine',
     category: 'SaaS Product',
-    status: 'Live Beta',
-    badge: 'Newly Deployed',
+    status: 'In Development',
     icon: 'Sparkles',
-    image: '/images/products/digiflow-preview.jpg',
     shortDescription:
       'An enterprise-grade SaaS platform built to automate business workflows, integrate AI agents, and streamline operations in real time.',
     heroDescription:
-      'DigiFlow SaaS is our flag-ship automated workspace engine designed for high-growth businesses. Connect API integrations, trigger autonomous AI workflows, and monitor key metrics in a unified dashboard.',
-    liveUrl: 'https://saas-demo.digiinsaf.com', // Replace with your actual SaaS deployment URL
-    deploymentDate: '2026-07',
+      'DigiFlow SaaS is our in-house automated workspace engine, designed for high-growth businesses. Connect API integrations, trigger autonomous AI workflows, and monitor key metrics in a unified dashboard.',
+    liveUrl: null,
+    targetLaunch: 'Targeting late 2026',
     highlights: [
       'Multi-tenant cloud architecture',
       'Real-time automated workflow triggers',
@@ -49,16 +48,14 @@ export const products = [
     name: 'InsafCRM SaaS',
     tagline: 'Customer Relationship & Pipeline Management System',
     category: 'SaaS Solution',
-    status: 'Deploying Soon',
-    badge: 'Coming Q3 2026',
+    status: 'In Development',
     icon: 'LayoutDashboard',
-    image: '/images/products/crm-preview.jpg',
     shortDescription:
       'Smart customer management solution designed specifically for agencies, startups, and service providers.',
     heroDescription:
       'Manage client leads, deal stages, automated invoicing, and communication history in one secure SaaS hub.',
-    liveUrl: 'https://crm.digiinsaf.com',
-    deploymentDate: '2026-09',
+    liveUrl: null,
+    targetLaunch: 'Targeting late 2026',
     highlights: [
       'Visual Kanban deal pipelines',
       'Automated email & WhatsApp follow-ups',
@@ -77,5 +74,3 @@ export const products = [
     techStack: ['Next.js', 'Python FastAPI', 'PostgreSQL', 'Redis', 'Vercel'],
   },
 ];
-
-export const getFeaturedProducts = () => products.filter((p) => p.status === 'Live Beta' || p.badge === 'Newly Deployed');
