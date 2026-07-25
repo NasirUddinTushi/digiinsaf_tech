@@ -83,12 +83,14 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: idx * 0.07 }}
                 viewport={{ once: true }}
-                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                className={`group/card rounded-2xl border transition-all duration-300 overflow-hidden relative ${
                   isExpanded
-                    ? `border-sea-300 bg-white shadow-elevation-md`
-                    : 'border-hairline bg-white/70 hover:bg-white hover:border-sea-200 hover:shadow-elevation-sm'
+                    ? `border-sea-300 bg-white shadow-elevation-md ring-1 ring-sea-200/50`
+                    : 'border-hairline bg-white/70 hover:bg-white hover:border-sea-200 hover:shadow-elevation-md'
                 }`}
               >
+                {/* Gradient accent top edge on hover */}
+                <div className={`absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl transition-all duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-60'}`} style={{ background: `linear-gradient(90deg, transparent, ${color.icon.includes('blue') ? '#3b82f6' : color.icon.includes('violet') ? '#8b5cf6' : color.icon.includes('emerald') ? '#10b981' : color.icon.includes('amber') ? '#f59e0b' : color.icon.includes('rose') ? '#f43f5e' : '#06b6d4'}, transparent)` }} />
                 {/* Clickable Header */}
                 <button
                   type="button"
@@ -108,15 +110,25 @@ export default function ServicesSection() {
                       <h3 className="text-base font-bold text-charcoal mt-0.5 leading-snug">{group.title}</h3>
                     </div>
                   </div>
-                  <motion.div
-                    animate={{ rotate: isExpanded ? 180 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border transition-colors ${
-                      isExpanded ? 'bg-sea-950 border-sea-950 text-white' : 'border-hairline bg-sea-50 text-sea-800'
-                    }`}
-                  >
-                    <ChevronDown className="h-4 w-4" />
-                  </motion.div>
+                  <div className="flex items-center gap-2">
+                    {/* Arrow hint on hover */}
+                    <motion.span
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: isExpanded ? 0 : undefined }}
+                      className={`hidden sm:inline-flex text-[10px] font-semibold uppercase tracking-wider transition-opacity duration-200 ${isExpanded ? 'opacity-0' : 'opacity-0 group-hover/card:opacity-100'} text-sea-500`}
+                    >
+                      Explore
+                    </motion.span>
+                    <motion.div
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border transition-colors ${
+                        isExpanded ? 'bg-sea-950 border-sea-950 text-white' : 'border-hairline bg-sea-50 text-sea-800 group-hover/card:bg-sea-100'
+                      }`}
+                    >
+                      <ChevronDown className="h-4 w-4" />
+                    </motion.div>
+                  </div>
                 </button>
 
                 {/* Animated Expandable Body */}

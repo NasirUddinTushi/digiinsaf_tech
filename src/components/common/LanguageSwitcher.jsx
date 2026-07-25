@@ -150,35 +150,7 @@ export default function LanguageSwitcher({ className, showWidgetHost = false, si
     setSelectedLanguage(nextLanguage);
     localStorage.setItem(STORAGE_KEY, nextLanguage);
     setTranslateCookie(nextLanguage);
-
-    // Trigger Google Translate programmatically via its hidden <select>
-    // This avoids a full-page reload and the white/blank screen flash.
-    const tryTrigger = () => {
-      const frame = document.querySelector('iframe.skiptranslate');
-      const select =
-        document.querySelector('.goog-te-combo') ||
-        frame?.contentDocument?.querySelector('.goog-te-combo');
-
-      if (select) {
-        select.value = nextLanguage;
-        select.dispatchEvent(new Event('change'));
-        return true;
-      }
-      return false;
-    };
-
-    // Give the widget a moment to initialise on first use, then fall back to reload
-    if (!tryTrigger()) {
-      let attempts = 0;
-      const interval = setInterval(() => {
-        attempts++;
-        if (tryTrigger() || attempts > 20) {
-          clearInterval(interval);
-          // Only reload if the widget never responded (rare edge-case)
-          if (attempts > 20) window.location.reload();
-        }
-      }, 150);
-    }
+    window.location.reload();
   }
 
   return (

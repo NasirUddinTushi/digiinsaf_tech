@@ -51,9 +51,9 @@ export default function CTABanner() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight"
           >
-            Let's turn your vision into a{' '}
+            See how far the right engineering partner can take{' '}
             <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-300 bg-clip-text text-transparent animate-gradient-shift">
-              shipped product.
+              your business.
             </span>
           </motion.h2>
 

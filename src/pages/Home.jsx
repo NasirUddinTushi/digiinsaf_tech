@@ -3,6 +3,7 @@ import HeroSection from '@/components/home/HeroSection';
 import TrustStrip from '@/components/home/TrustStrip';
 import ServicesSection from '@/components/home/ServicesSection';
 import WorkSection from '@/components/home/WorkSection';
+import TestimonialsSection from '@/components/home/TestimonialsSection';
 import WhyDigiInsaf from '@/components/home/WhyDigiInsaf';
 import EngagementModels from '@/components/home/EngagementModels';
 import ProcessSection from '@/components/home/ProcessSection';
@@ -22,6 +23,7 @@ export default function Home() {
       <TrustStrip />
       <ServicesSection />
       <WorkSection />
+      <TestimonialsSection />
       <WhyDigiInsaf />
       <EngagementModels />
       <ProcessSection />
